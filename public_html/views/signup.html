@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MovieStore</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+</head>
+<body ng-app="myApp">
+<div class="container h-100">
+<div class="row h-100 justify-content-center align-items-center">
+<form  ng-controller="signUpController" ng-submit="submit()" >
+	<fieldset>
+    <legend>Sign In</legend>
+        
+    <div class="form-group ">
+      <label class="col-form-label col-form-label-sm" for="inputSmall">Email address</label>
+      <input type="email" class="form-control form-control-sm" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter email" ng-model="email">
+    </div>
+    
+    <div class="form-group ">
+      <label class="col-form-label col-form-label-sm" for="inputSmall" >First Name</label>
+      <input type="text" class="form-control form-control-sm" id="firstname" name="firstname" aria-describedby="firstNameHelp" placeholder="Enter First Name" ng-model="firstname">
+    </div>
+    
+    <div class="form-group ">
+      <label class="col-form-label col-form-label-sm" for="inputSmall">LastName</label>
+      <input type="text" class="form-control form-control-sm" id="lastname" name="lastname" aria-describedby="lastNameHelp" placeholder="Enter Last Name" ng-model="lastname">
+    </div>
+    
+    <div class="form-group">
+      <label class="col-form-label col-form-label-sm" for="inputSmall">Password</label>
+      <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="Password" ng-model="password">
+    </div>
+    
+    <div class="form-group">
+      <label class="col-form-label col-form-label-sm" for="inputSmall">Confirm Password</label>
+      <input type="password" class="form-control form-control-sm" id="confirmpassword" name="confirmpassword" placeholder="ConfirmPassword" ng-model="confirmpassword">
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+	</fieldset>
+	</form>
+</div>
+</div>
+</body>
+<script src='../js/config.js'></script>
+<script src='../js/signup.js'></script>
+</html>
