@@ -1,17 +1,65 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>MovieStore</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-</head>
-<body ng-app="myApp">
-<a class="nav-link float-right" href="./login.html">Sign up</a>	
+	<head>
+		<title>MovieStore</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+		<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://unpkg.com/ng-table/bundles/ng-table.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css">
+		<script src="../js/config.js"></script>
+		<script src='../js/search.js'></script>
+	</head>
+	<body ng-app="myApp" ng-controller="searchController">
+			
+		<nav class="navbar navbar-expand-lg navbar-dark bg-light">
+			
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
+			<span class="navbar-toggler-icon"></span>
+			</button>
 
-</body>
-<script src="../js/config.js"></script>
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav mr-auto">
+				  <li class="nav-item active">
+					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="#">TBD</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="#">TBD</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link" href="#">TBD</a>
+				  </li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0" ng-submit="search()" >
+				  <input class="form-control mr-sm-2" type="text" placeholder="Search" name="searchText" ng-model="searchText">
+				  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+				</form>
+				<a class="nav-link" href="./login.html">Sign up</a>
+			</div>
+		</nav>
+
+		<div>
+			<div>
+				<table ng-table="tableParams" class="table table-condensed table-bordered table-striped table-hover">
+					<tr class="table-active" ng-repeat="user in $data">
+		            	<td title="'Title'" filter="{ Title: 'text'}" sortable="'Title'">{{user.title}}</td>
+						<td title="'Genre'" filter="{ genre: 'text'}" sortable="'genre'">{{user.genre}}</td>
+						<td title="'Description'" filter="{ description: 'text'}" sortable="'description'">{{user.description}}</td>
+						<td title="'Year'" filter="{ year: 'number'}" sortable="'year'">{{user.year}}</td>
+						<td title="'Duration'" filter="{ runtime_minutes: 'number'}" sortable="'runtime_minutes'">{{user.runtime_minutes}}</td>
+						<td title="'Rating'" filter="{ rating: 'number'}" sortable="'rating'">{{user.rating}}</td>
+						<td><button type="button" class="btn btn-primary">Add to Cart</button></td>
+						<td><button type="button" class="btn btn-success">Buy</button></td>
+		    		</tr>		  		
+				</table>
+			</div>
+		</div>
+	</body>
+
 </html>
