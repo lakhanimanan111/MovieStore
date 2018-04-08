@@ -13,7 +13,8 @@ $login = 0;
 if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
 			
-			$_SESSION["username"] = $username;
+			$_SESSION["username"] = $row["username"];
+			$_SESSION["userid"] = $row["userid"];
 			if($row["isadmin"]==0)
 			{
 				$_SESSION["isAdmin"] = 0;

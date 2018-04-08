@@ -9,8 +9,7 @@ app.controller('loginController',['$scope', '$http', '$window',function($scope, 
 	};
     $http.post("../apis/login.php", data)
     .then(function(response) {
-		//console.log(response);
-		//console.log(response.data);
+		
 		if(response.data == 1){
 			$window.location.href = '../views/main.html';
 			}
