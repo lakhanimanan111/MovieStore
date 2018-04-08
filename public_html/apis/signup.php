@@ -16,10 +16,11 @@ if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
 		
 			$_SESSION["username"] = $username;
+			$_SESSION["isAdmin"] = 0;
 			$login = 1;
 			
 			
 		}
 	} 
-	echo $sql;
+	//echo $sql;
 ?>
