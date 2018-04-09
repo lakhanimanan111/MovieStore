@@ -5,6 +5,8 @@
 //GET|PUT|DELETE http://www.example.com/movies/66432
 //for reading, updating, deleting movie 66432, respectively.
 require_once('../includes/dbconnect.php');
+include 'ChromePhp.php';
+
 $conn = $connection;
 
 
@@ -70,11 +72,26 @@ if(isset($params))
 		$year = $_POST['year'];
 		$runtime_minutes = $_POST['runtime_minutes'];
 		$rating = $_POST['rating'];
+		$uploadedfilenames = json_decode($_POST['uploaded_file_names']);
+		
 
+		//insert new movie into movie data table
 		$query = "INSERT INTO `moviedata`(`title`, `genre`, `description`,  `year`, `runtime_minutes`, `rating`) VALUES ('".$title."','".$genre."','".$description."',".$year.",".$runtime_minutes.",".$rating.")";
 
 		$result = mysqli_query ($conn,$query);
-		echo $result;
+
+		//get the max field of movie id as its an auto incrementing field
+		$query2 = "SELECT MAX(movieid) FROM moviedata";
+		$result2 = mysqli_query ($conn,$query2);
+		$lastrow = mysqli_fetch_assoc($result2);	
+		$retid = $lastrow["MAX(movieid)"];
+		
+
+		//insert all the picture file names into the movieimages table
+		foreach ($uploadedfilenames as &$value) {
+			$query3 = "INSERT INTO `movieimages`(`movieid`, `imageurl`) VALUES (".$retid.",'".$value."')";
+			$result3 = mysqli_query ($conn,$query3);	
+		}
 	}
 	else if($requestMethod == 'GET')
 	{

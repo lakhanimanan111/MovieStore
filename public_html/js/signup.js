@@ -1,7 +1,7 @@
 
 var app = angular.module("myApp", []);
 	
-app.controller('signUpController',['$scope', '$http', function($scope, $http) {
+app.controller('signUpController',['$scope', '$http', '$window',function($scope, $http, $window) {
 	
 	$scope.submit = function() {
 		var data = {
@@ -11,8 +11,10 @@ app.controller('signUpController',['$scope', '$http', function($scope, $http) {
 		lastname: $scope.lastname,
 	};
     $http.post("../apis/signup.php", data)
-    .then(function(response) {
-		console.log(response);
+    .then(function() {	
+		$window.location.href = '../views/login.html';
+			
+			
     });
 
     };

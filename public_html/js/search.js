@@ -1,60 +1,34 @@
-	var app = angular.module("myApp", ["ngTable"]);		
-app.controller('searchController', ['$scope', '$http', '$filter', 'NgTableParams', function($scope, $http, $filter, NgTableParams) {
-		$scope.search = function() {				
+var app = angular.module("myApp", ['ui.bootstrap']);
+app.controller('mainController', ['$scope', '$http', function($scope, $http) {
+	 $scope.filteredMovieList = []
+	,$scope.currentPage = 0
+	,$scope.numPerPage = 10
+	,$scope.maxSize = 5;
+
+	$scope.search = function() {		
 		var data = {
 			searchString: $scope.searchText,
 		};
 
+		//alert(data.searchString);
 		$http.post("../apis/search.php", data).then(function(response) {
-				$scope.data = response.data;
+						if(!response.data == []) {
+							$scope.movieList =  response.data;
+							$scope.currentPage = 1;
+						}
+				    })
+	}
 
-			$scope.tableParams = new NgTableParams(
+	$scope.$watch('currentPage + numPerPage', function() {
 
-				{
-					page: 1,            // show first page
-					count: 10          // count per page
-				}, 
-
-				{
-
-					total: $scope.data.length, // length of data
-					getData: function(params) {
-						
-						var theData = angular.copy($scope.data);
-
-						var filterObj = params.filter(),
-						filteredData = $filter('filter')($scope.data, filterObj);
-
-						
-						Object.keys(filterObj).forEach(function (property) {
-						    if (filterObj[property] === null) {
-						      	//filteredData = $scope.data;
-						      	delete filterObj[property];
-						      	$scope.tableParams.reload();
-						    }
-					 	});
-					 	filteredData = $filter('filter')($scope.data, filterObj);
-						
-
-						var sortObj = params.sorting(),
-						orderedData = $filter('orderBy')(filteredData, sortObj);
-
-						
-						Object.keys(filterObj).forEach(function (property) {
-						    if (filterObj[property] === null) {
-						      //orderedData = $scope.data;
-						      delete filterObj[property];
-						      $scope.tableParams.reload();
-						    }
-					 	});
-					 	
-
-						return orderedData;
-					}
-
-				});
-		});
+		if($scope.currentPage > 0) {
+		    var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+		    , end = begin + $scope.numPerPage;
+		    
+		    $scope.filteredMovieList = $scope.movieList.slice(begin, end);
 
 		}
+    
+  });
 
-}]);
+}]); 

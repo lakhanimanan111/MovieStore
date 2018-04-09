@@ -10,6 +10,19 @@ var app = angular.module('myApp', []);
 //     });
 // });
 
+app.directive('ngFile', ['$parse', function ($parse) {
+  return {
+   restrict: 'A',
+   link: function(scope, element, attrs) {
+     element.bind('change', function(){
+
+     $parse(attrs.ngFile).assign(scope,element[0].files)
+     scope.$apply();
+   });
+  }
+ };
+}]);
+
 app.controller("MovieController", function($scope, $http) {
    	$scope.message = "";
     $scope.getMovie = function () {
@@ -70,7 +83,8 @@ app.controller("MovieController", function($scope, $http) {
                 description: $scope.moviedetails.description,
                 year: $scope.moviedetails.year,
                 runtime_minutes: $scope.moviedetails.runtime_minutes,
-                rating: $scope.moviedetails.rating
+                rating: $scope.moviedetails.rating,
+                uploaded_file_names: JSON.stringify(uploadedFileNames)
             });
 
     		$scope.moviedetails = null;
@@ -87,11 +101,11 @@ app.controller("MovieController", function($scope, $http) {
        		.then(function mySuccess(response) {
 		        var message = "Movie was added successfully";
 		         $("#returnmsg").html(message);
-    		$("#messagemodal").modal('show');
+    		      $("#messagemodal").modal('show');
 		    }, function myError(response) {
 		        var message = "There was a problem with the addition";
 		         $("#returnmsg").html(message);
-    		$("#messagemodal").modal('show');
+    		      $("#messagemodal").modal('show');
 		    });
    		}
 	} 
@@ -137,4 +151,30 @@ app.controller("MovieController", function($scope, $http) {
     	
     } 
 
+    $scope.upload = function(){
+ 
+       var fd = new FormData();
+       angular.forEach($scope.uploadfiles,function(file){
+         fd.append('file[]',file);
+       });
+
+       var resourceUrl = "/fileupload";
+       $http({
+         method: 'post',
+         url: resourceUrl,
+         data: fd,
+         headers: {'Content-Type': undefined},
+       }).then(function successCallback(response) {  
+         // Store response data
+         uploadedFileNames = response.data;
+         $scope.addMovie();
+       });
+   }
+
+   $scope.uploadAndAddMovieDetails = function() {
+        $scope.upload();
+   }
 });
+
+
+
