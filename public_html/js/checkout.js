@@ -14,9 +14,9 @@ app.controller('checkoutController',['$scope', '$http', '$window',function($scop
    $http.post("../apis/checkout.php")
     .then(function(response) {
 		console.log(response);
-		//if(response.data == 1){
-			//$window.location.href = '../views/main.html';
-			//}
+		if(response.data == 1){
+			$window.location.href = '../views/main.html';
+			}
 		//else{	
 			//$window.location.href = '../views/login.html';
 			//}	
