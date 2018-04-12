@@ -4,6 +4,9 @@
 //GET http://www.example.com/movies for getting all the movie.
 //GET|PUT|DELETE http://www.example.com/movies/66432
 //for reading, updating, deleting movie 66432, respectively.
+
+//DELETE http://www.example.com/movies/image deleting the image for that movie
+
 require_once('../includes/dbconnect.php');
 include 'ChromePhp.php';
 
@@ -29,7 +32,23 @@ if(isset($params))
 			if(mysqli_num_rows($result) > 0) 
 			{
 				$row1 = mysqli_fetch_assoc($result);	
-				$row1 = array_change_key_case($row1,CASE_LOWER);		
+				$row1 = array_change_key_case($row1,CASE_LOWER);
+
+				$rows = array();
+				//get movie images
+				$query1 = "SELECT `imageurl` FROM `movieimages` WHERE `movieid` = ".$paramint;	
+				$result1 = mysqli_query ($conn,$query1);
+
+				if(mysqli_num_rows($result1) > 0) 
+				{
+					while($row2 = mysqli_fetch_assoc($result1)) 
+					{	
+						$row2 = array_change_key_case($row2,CASE_LOWER);		
+				 		$rows[] = $row2["imageurl"];
+					} 
+			 		$row1["imageurl"] =  $rows;
+				}
+
 				echo json_encode($row1);	
 			} else {
 				echo http_response_code(404);
@@ -47,9 +66,17 @@ if(isset($params))
 			$year = $post_vars['year'];
 			$runtime_minutes = $post_vars['runtime_minutes'];
 			$rating = $post_vars['rating'];
+			$uploadedfilenames = json_decode($post_vars['uploaded_file_names']);
 
+			//update row in moviedata table
 			$query = "UPDATE `moviedata` SET `title`='".$title."',`genre`='".$genre."',`description`='".$description."',`year`=".$year.",`runtime_minutes`=".$runtime_minutes.",`rating`=".$rating." WHERE `movieid` = ".$paramint;
 			$result = mysqli_query ($conn,$query);
+
+			//insert all the picture file names into the movieimages table
+			foreach ($uploadedfilenames as &$value) {
+				$query3 = "INSERT INTO `movieimages`(`movieid`, `imageurl`) VALUES (".$paramint.",'".$value."')";
+				$result3 = mysqli_query ($conn,$query3);	
+			}
 			echo $result;
 		} 
 		else if($requestMethod == 'DELETE')
@@ -60,6 +87,20 @@ if(isset($params))
 			$result = mysqli_query ($conn,$query);
 			echo $result;
 		}  
+	} else {
+		//not numeric meaning hitting /image api
+		 if($requestMethod == 'DELETE')
+		{
+			//delete an image for a particular movie
+			parse_str(file_get_contents("php://input"),$post_vars);
+			$movieid = $post_vars['movieid'];
+			$imageurl = $post_vars['imageurl'];
+
+			$query = "DELETE FROM `movieimages` WHERE `movieid` = ".$movieid." AND imageurl = '".$imageurl."'";
+			$result = mysqli_query ($conn,$query);
+			echo $result;
+
+		}
 	}
 } else {
 	if($requestMethod == 'POST')
@@ -96,7 +137,9 @@ if(isset($params))
 	else if($requestMethod == 'GET')
 	{
 		//return all the movies
-		$query = "SELECT `movieid`, `title`, `genre`, `description`, `year`, `runtime_minutes`, `rating` FROM `moviedata` WHERE `isDeleted`!= 1";
+		// $query = "SELECT `movieid`, `title`, `genre`, `description`, `year`, `runtime_minutes`, `rating` FROM `moviedata` WHERE `isDeleted`!= 1";
+		$query = "SELECT d.movieid, d.title, d.genre, d.description, d.year, d.runtime_minutes, d.rating, GROUP_CONCAT(i.imageurl SEPARATOR ', ') picid FROM moviedata d left JOIN movieimages i ON d.movieid = i.movieid WHERE d.isDeleted != 1 GROUP BY d.movieid";
+		
 		$rows = array();
 
 		mysqli_set_charset($conn, 'utf8mb4');  // procedural style
@@ -118,7 +161,7 @@ if(isset($params))
 			echo "error";
 			echo http_response_code(404);
 		}
-	}
+	} 
 }
 
 mysqli_close($conn);

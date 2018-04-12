@@ -6,143 +6,21 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css"> 
-<!-- old -->
+	<link rel="stylesheet" href="../css/main.css"> 
+
 
 </head>
-<body>
-<div ng-app="myApp" ng-controller="MovieController" class="container"> 
+<body ng-app="myApp" ng-controller="MovieController">
+<div  class="container"> 
 
 <div class="row panel panel-default">
 <div class="col-lg-12 panel-body">
+	<br>
+	<p class="panel-body"><a class="btn btn-primary" href="add-movie.html">Add a movie </a>  </p>
+	<br>
+   <div id="getmovie">
+   	<h4> Movie list </h4>
 
-<ul class="nav nav-tabs">
-  <li class="nav-item ">
-    <a class="nav-link active" data-toggle="tab" href="#addmovie">Add Movie</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#modifymovie">Modify Movie</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#deletemovie">Delete Movie</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-toggle="tab" href="#getmovie" ng-click="getAllMovies()">List Movies</a>
-  </li>
-  
-</ul>
-<div id="myTabContent" class="tab-content">
-  <div class="tab-pane fade active show" id="addmovie">
-
-		<form id="addmovieform">
-		  		   
-			   	<div class="form-group">
-				  <label class="col-form-label" for="movietitle">Title</label>
-				  <input type="text" class="form-control" id="movietitle" ng-model="moviedetails.title">
-				</div>
-
-			    <div class="form-group">
-			      <label class="col-form-label" for="moviedesc">Description</label>
-			      <textarea class="form-control" id="movieDescription" ng-model="moviedetails.description" rows="3"></textarea>
-			    </div>
-
-			    <div class="form-group">
-				  <label class="col-form-label" for="moviegenre">Genre</label>
-				  <input type="text" class="form-control" id="movieGenre" ng-model="moviedetails.genre">
-				</div>
-
-		 		<div class="form-group">
-				  <label class="col-form-label" for="movieyear">Year</label>
-				  <input type="text" class="form-control" id="movieYear" ng-model="moviedetails.year">
-				</div>
-
-				<div class="form-group">
-				  <label class="col-form-label" for="movieruntime">Runtime (minutes)</label>
-				  <input type="text" class="form-control" id="movieRuntime" ng-model="moviedetails.runtime_minutes">
-				</div>	
-
-				<div class="form-group">
-				  <label class="col-form-label" for="movierating">Rating</label>
-				  <input type="text" class="form-control" id="movieRating" ng-model="moviedetails.rating">
-				</div>		
-
- 				<!-- file upload -->
- 				<div class="form-group">
- 					<label class="col-form-label" for="picture">Pictures</label>
- 					<br>
- 					<input type='file' multiple ng-file='uploadfiles' class="form-control-file"><br/>
- 					<!-- <input type='button' value='Upload' id='upload' ng-click='upload()' > -->
- 
- 					<!-- <p>{{ response.name }}</p> -->
-
- 				</div>
-			    
-			    <button type="submit" class="btn btn-primary" ng-click="uploadAndAddMovieDetails()">Submit</button>
-		  	
-		</form>
-  </div>
-  <div class="tab-pane fade" id="modifymovie">
-     <!-- delete movie -->
-		<div id="modify-movie-group"> 
-			<p id="operationmessage"></p>
-
-			<div class="form-group">
-			  <label class="col-form-label" for="inputDefault">Movie ID</label>
-			  <input type="text" class="form-control" placeholder="Enter a numeric id" id="inputDefault" ng-model="movieid">
-			</div>
-			<button type="button" class="btn btn-primary" ng-click="getMovie()">Get Details</button>
-		</div>
-		<div id="modify-movie-details-group" class="panel-body" ng-if="modifiedmoviedetails">
-		<form id="modifymovieform">
-		  	<fieldset>		   
-			   	<div class="form-group">
-				  <label class="col-form-label" for="movietitle">Title</label>
-				  <input type="text" class="form-control" id="movietitle" ng-model="modifiedmoviedetails.title">
-				</div>
-
-			    <div class="form-group">
-			      <label class="col-form-label" for="moviedesc">Description</label>
-			      <textarea class="form-control" id="movieDescription" ng-model="modifiedmoviedetails.description" rows="3"></textarea>
-			    </div>
-
-			    <div class="form-group">
-				  <label class="col-form-label" for="moviegenre">Genre</label>
-				  <input type="text" class="form-control" id="movieGenre" ng-model="modifiedmoviedetails.genre">
-				</div>
-
-		 		<div class="form-group">
-				  <label class="col-form-label" for="movieyear">Year</label>
-				  <input type="text" class="form-control" id="movieYear" ng-model="modifiedmoviedetails.year">
-				</div>
-
-				<div class="form-group">
-				  <label class="col-form-label" for="movieruntime">Runtime (minutes)</label>
-				  <input type="text" class="form-control" id="movieRuntime" ng-model="modifiedmoviedetails.runtime_minutes">
-				</div>	
-
-				<div class="form-group">
-				  <label class="col-form-label" for="movierating">Rating</label>
-				  <input type="text" class="form-control" id="movieRating" ng-model="modifiedmoviedetails.rating">
-				</div>		
-			   
-
-		    	<button type="submit" class="btn btn-primary" ng-click="updateMovie()">Submit</button>
-		  	</fieldset>
-		</form>
-	</div>
-  </div>
-  <div class="tab-pane fade" id="deletemovie">
-    <!-- delete movie -->
-		<div id="delete-movie-group"> 
-			<p id="operationmessage"></p>
-			<div class="form-group">
-			  <label class="col-form-label" for="inputDefault">Movie ID</label>
-			  <input type="text" class="form-control" placeholder="Enter a numeric id" id="inputDefault" ng-model="movieid">
-			</div>
-			<button type="button" class="btn btn-primary" ng-click="deleteMovie()">Delete</button>
-			
-		</div>
-  </div>
-  <div class="tab-pane fade" id="getmovie">
    <!-- list all movies -->
 		<table class="table table-hover">
 		  <thead>
@@ -154,6 +32,8 @@
 		      <th scope="col">Year</th>
 		      <th scope="col">Runtime Minutes</th>
 		      <th scope="col">Rating</th>
+		      <th scope="col"></th>
+		      <th scope="col"></th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -165,6 +45,14 @@
 		      <td>{{movie.year}}</td>
 			  <td>{{movie.runtime_minutes}}</td>
 		      <td>{{movie.rating}}</td>
+		      <td><a class="btn btn-primary btn-sm" href="modify-movie.html?movieid={{movie.movieid}}">
+          				 Edit 
+        				</a>
+        	   </td>
+        	   <td><a class="btn btn-primary btn-sm" ng-click="confirmDeleteMovie(movie.movieid)">
+          				 Remove 
+        				</a>
+        		</td>	
 		    </tr>
 		  </tbody>
 		</table> 
@@ -181,10 +69,12 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-body">
-        <p id="returnmsg"></p>
+        <p id="returnmsg"> Do you want to delete this movie?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deleteMovie()">Yes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+
       </div>
     </div>
   </div>
