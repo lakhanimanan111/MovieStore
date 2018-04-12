@@ -137,7 +137,9 @@ if(isset($params))
 	else if($requestMethod == 'GET')
 	{
 		//return all the movies
-		$query = "SELECT `movieid`, `title`, `genre`, `description`, `year`, `runtime_minutes`, `rating` FROM `moviedata` WHERE `isDeleted`!= 1";
+		// $query = "SELECT `movieid`, `title`, `genre`, `description`, `year`, `runtime_minutes`, `rating` FROM `moviedata` WHERE `isDeleted`!= 1";
+		$query = "SELECT d.movieid, d.title, d.genre, d.description, d.year, d.runtime_minutes, d.rating, GROUP_CONCAT(i.imageurl SEPARATOR ', ') picid FROM moviedata d left JOIN movieimages i ON d.movieid = i.movieid WHERE d.isDeleted != 1 GROUP BY d.movieid";
+		
 		$rows = array();
 
 		mysqli_set_charset($conn, 'utf8mb4');  // procedural style
