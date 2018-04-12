@@ -1,5 +1,6 @@
 var app = angular.module('myApp', []);
 
+
 app.directive('ngFile', ['$parse', function ($parse) {
   return {
    restrict: 'A',
@@ -94,6 +95,7 @@ app.controller("MovieController", function($scope, $http, $window) {
 		        // var message = "Movie was added successfully";
 		        //  $("#returnmsg").html(message);
     		    //   $("#messagemodal").modal('show');
+
 		    }, function myError(response) {
 		        var message = "There was a problem with the addition";
 		         $("#returnmsg").html(message);
@@ -141,5 +143,3 @@ app.controller("MovieController", function($scope, $http, $window) {
    }
 
 });
-
-
