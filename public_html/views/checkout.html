@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MovieStore</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+  
+</head>
+<body ng-app="myApp">
+<div class="container h-100">
+  <div class="container">
+	
+	<form  ng-controller="checkoutController" ng-submit="submit()" >	
+	<fieldset>
+		<div class="row">
+			<div class="col-lg-6">
+				<legend>Shipping Information</legend>
+    
+				<div class="form-group ">
+					<label class="col-form-label col-form-label-sm" for="inputSmall" >Address First Line</label>
+					<input type="text" class="form-control form-control-sm" id="address" name="address" placeholder="Enter Address First Line" ng-model="address">
+				</div>
+				<div class="form-group ">
+					<label class="col-form-label col-form-label-sm" for="inputSmall" >Apartment Number</label>
+					<input type="text" class="form-control form-control-sm" id="apartmentnumber" name="apartmentnumber" placeholder="Enter Apartment Number" ng-model="apartmentnumber">
+				</div>
+				<div class="form-group ">
+					<label class="col-form-label col-form-label-sm" for="inputSmall" >City</label>
+					<input type="text" class="form-control form-control-sm" id="city" name="city" placeholder="Enter City Name" ng-model="city">
+				</div>
+				<div class="form-group">
+					<label for="exampleSelect1">States</label>
+					<select class="form-control" id="state" name="state" ng-model="state">
+						<option value="AL">Alabama</option>
+						<option value="AK">Alaska</option>
+						<option value="AZ">Arizona</option>
+						<option value="AR">Arkansas</option>
+						<option value="CA">California</option>
+						<option value="CO">Colorado</option>
+						<option value="CT">Connecticut</option>
+						<option value="DE">Delaware</option>
+						<option value="DC">District Of Columbia</option>
+						<option value="FL">Florida</option>
+						<option value="GA">Georgia</option>
+						<option value="HI">Hawaii</option>
+						<option value="ID">Idaho</option>
+						<option value="IL">Illinois</option>
+						<option value="IN">Indiana</option>
+						<option value="IA">Iowa</option>
+						<option value="KS">Kansas</option>
+						<option value="KY">Kentucky</option>
+						<option value="LA">Louisiana</option>
+						<option value="ME">Maine</option>
+						<option value="MD">Maryland</option>
+						<option value="MA">Massachusetts</option>
+						<option value="MI">Michigan</option>
+						<option value="MN">Minnesota</option>
+						<option value="MS">Mississippi</option>
+						<option value="MO">Missouri</option>
+						<option value="MT">Montana</option>
+						<option value="NE">Nebraska</option>
+						<option value="NV">Nevada</option>
+						<option value="NH">New Hampshire</option>
+						<option value="NJ">New Jersey</	option>
+						<option value="NM">New Mexico</option>
+						<option value="NY">New York</option>
+						<option value="NC">North Carolina</option>
+						<option value="ND">North Dakota</option>
+						<option value="OH">Ohio</option>
+						<option value="OK">Oklahoma</option>
+						<option value="OR">Oregon</option>
+						<option value="PA">Pennsylvania</option>
+						<option value="RI">Rhode Island</option>
+						<option value="SC">South Carolina</option>
+						<option value="SD">South Dakota</option>
+						<option value="TN">Tennessee</option>
+						<option value="TX">Texas</option>
+						<option value="UT">Utah</option>
+						<option value="VT">Vermont</option>
+						<option value="VA">Virginia</option>
+						<option value="WA">Washington</option>
+						<option value="WV">West Virginia</option>
+						<option value="WI">Wisconsin</option>
+						<option value="WY">Wyoming</option>
+					</select>
+				</div>
+	   
+				<div class="form-group ">
+					<label class="col-form-label col-form-label-sm" for="inputSmall" >Zip Code</label>
+					<input type="text" class="form-control form-control-sm" id="zipcode" name="zipcode" placeholder="Enter Zip Code" ng-model="zipcode">
+				</div>
+			</div>
+			<div class="col-lg-4 offset-lg-1">
+				<legend>Card Details</legend>
+				<div class="form-group ">
+					<label class="col-form-label col-form-label-sm" for="inputSmall" >Owner</label>
+					<input type="text" class="form-control form-control-sm" id="owner" name="owner" placeholder="Enter Owner Name" ng-model="owner">
+				</div>
+				<div class="form-group ">
+					<label class="col-form-label col-form-label-sm" for="inputSmall" >CVV</label>
+					<input type="text" class="form-control form-control-sm" id="cvv" name="cvv" placeholder="Enter CVV Number" ng-model="cvvnumber">
+				</div>
+				<div class="form-group ">
+					<label class="col-form-label col-form-label-sm" for="inputSmall" >Card Number</label>
+					<input type="text" class="form-control form-control-sm" id="cardnumber" name="cardnumber" placeholder="Enter Card Number" ng-model="cardnumber">
+				</div>
+				<div class="form-group">
+					<label for="exampleSelect1">Expiration Date</label>
+					<select class="form-control" id="expirationdate" name="expirationdate" ng-model="expirationdate">
+						<option value="01">January</option>
+						<option value="02">February </option>
+						<option value="03">March</option>
+						<option value="04">April</option>
+						<option value="05">May</option>
+						<option value="06">June</option>
+						<option value="07">July</option>
+						<option value="08">August</option>
+						<option value="09">September</option>
+						<option value="10">October</option>
+						<option value="11">November</option>
+						<option value="12">December</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="exampleSelect1">Expiration Date</label>
+					<select class="form-control" id="expirationyear" name="expirationyear" ng-model="expirationyear">
+						<option value="18"> 2018</option>
+						<option value="19"> 2019</option>
+						<option value="20"> 2020</option>
+						<option value="21"> 2021</option>
+						<option value="22"> 2022</option>
+						<option value="23"> 2023</option>
+					</select>
+				</div>	
+			</div>
+			
+			<div class="jumbotron">
+				<legend>Review Order Details</legend>
+				<div class="row">
+					<div class="col-lg-6">
+						<legend>Movie Information</legend>
+						<div ng-repeat="x in moviedata">
+						<h6>
+							Title
+						<small class="text-muted">{{x.title}}</small>
+						</h6>
+						<h6>
+							Description
+						<small class="text-muted">{{x.description}}</small>
+						</h6>
+						<h6>
+							Genre
+						<small class="text-muted">{{x.genre}}</small>
+						</h6>
+						<h6>
+							Quantity
+						<small class="text-muted">{{x.quantity}}</small>
+						</h6>
+						
+						</div>
+						
+					</div>
+					<div class="col-lg-4 offset-lg-1">
+						<legend>Shipping Information</legend>
+						<p>{{address + " " + apartmentnumber + " " + city + " " + state + " " + zipcode}}</p>
+					</div>
+				</div>	
+				<p class="lead">
+					<button ng-click="go()" class="btn btn-primary">Update Cart</button>
+					<button type="submit" class="btn btn-primary">Place Order</button>
+					
+				</p>
+			</div>
+        
+        </div>
+	
+	</fieldset>
+	</div>	  
+	</form>
+	
+	</div>
+</div>	 
+</body>
+<script src='../js/config.js'></script>
+<script src='../js/checkout.js'></script>
+</html>

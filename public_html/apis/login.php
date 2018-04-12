@@ -1,4 +1,5 @@
 <?php 
+//include 'ChromePhp.php';
 session_start();
 $request_body = file_get_contents('php://input');
 $requestParams = json_decode( $request_body, true );
@@ -11,12 +12,20 @@ $result = $connection->query($sql);
 $login = 0;
 if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
-		
-			$_SESSION["username"] = $username;
+			
+			$_SESSION["username"] = $row["username"];
+			$_SESSION["userid"] = $row["userid"];
+			if($row["isadmin"]==0)
+			{
+				$_SESSION["isAdmin"] = 0;
+			}else{
+				$_SESSION["isAdmin"] = 1;
+				}
 			$login = 1;
-			
-			
+		
 		}
+		
 	} 
+	
 	echo $login;
 ?>

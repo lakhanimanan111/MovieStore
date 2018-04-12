@@ -7,13 +7,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-		<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
-		<link rel="stylesheet" type="text/css" href="https://unpkg.com/ng-table/bundles/ng-table.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css">
+		<script data-require="ui-bootstrap@*" data-semver="0.12.1" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
 		<script src="../js/config.js"></script>
 		<script src='../js/search.js'></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/main.css">
 	</head>
-	<body ng-app="myApp" ng-controller="searchController">
+	<body ng-app="myApp" ng-controller="mainController">
 			
 		<nav class="navbar navbar-expand-lg navbar-dark bg-light">
 			
@@ -44,22 +44,51 @@
 			</div>
 		</nav>
 
-		<div>
-			<div>
-				<table ng-table="tableParams" class="table table-condensed table-bordered table-striped table-hover">
-					<tr class="table-active" ng-repeat="user in $data">
-		            	<td title="'Title'" filter="{ Title: 'text'}" sortable="'Title'">{{user.title}}</td>
-						<td title="'Genre'" filter="{ genre: 'text'}" sortable="'genre'">{{user.genre}}</td>
-						<td title="'Description'" filter="{ description: 'text'}" sortable="'description'">{{user.description}}</td>
-						<td title="'Year'" filter="{ year: 'number'}" sortable="'year'">{{user.year}}</td>
-						<td title="'Duration'" filter="{ runtime_minutes: 'number'}" sortable="'runtime_minutes'">{{user.runtime_minutes}}</td>
-						<td title="'Rating'" filter="{ rating: 'number'}" sortable="'rating'">{{user.rating}}</td>
-						<td><button type="button" class="btn btn-primary">Add to Cart</button></td>
-						<td><button type="button" class="btn btn-success">Buy</button></td>
-		    		</tr>		  		
-				</table>
-			</div>
+		<div class="search__container" ng-show="filteredMovieList.length > 0">
+			<input type="text" ng-model="query.title" placeholder="Search Title" />
+			<input type="text" ng-model="query.genre" placeholder="Search Genre" />
+			<input type="text" ng-model="query.year" placeholder="Search Year" />
+			<input type="text" ng-model="query.rating" placeholder="Search Rating" />
+
+			<ul class="card">
+				<li class="search-item" ng-repeat="movie in filteredMovieList | filter:query">
+				  <div class="search-item__image" style="background-image: url(http://stefanboyle.com/wp-content/uploads/2013/04/marketinglessonsfromjames-bond.jpg);"></div>
+				  <div class="search-item__options title">
+				    <p class="text--medium">{{movie.title}}
+				        <span class="label label--red text--upcase">
+				          {{movie.genre}}
+				        </span>
+				    </p>
+				    <p class="text--small text--muted">{{movie.description}}</p>
+				  </div>
+				  <div class="search-item__options">
+				    <p class="text--medium">{{movie.year}}</p>
+				  </div>
+				  <div class="search-item__options">
+				    <p class="text--medium">{{movie.duration}}</p>
+				  </div>
+				  <div class="search-item__options">
+				    <p class="text--medium">{{movie.rating}}</p>
+				  </div>
+				  <div class="search-item__options">
+				    <button class="button button--outline button--small">Add to Cart</>
+				  </div>
+				  <div class="search-item__options">
+				    <button class="button button--outline button--small">Buy</>
+				  </div>
+				</li>
+
+			</ul>
+
 		</div>
+
+		<pagination
+		ng-model="currentPage"
+		total-items="movieList.length"
+		max-size="maxSize"  
+		boundary-links="true">
+		</pagination>
+
 	</body>
 
 </html>

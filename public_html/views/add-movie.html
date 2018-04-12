@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin</title>
+	 <meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css"> 
+	<link rel="stylesheet" href="../css/main.css"> 
+
+</head>
+<body>
+<div ng-app="myApp" ng-controller="MovieController" class="container"> 
+
+<div class="row panel panel-default">
+<div class="col-lg-12 panel-body">
+
+ <div id="addmovie">
+
+		<form id="addmovieform">
+		  		   
+			   	<div class="form-group">
+				  <label class="col-form-label" for="movietitle">Title</label>
+				  <input type="text" class="form-control" id="movietitle" ng-model="moviedetails.title">
+				</div>
+
+			    <div class="form-group">
+			      <label class="col-form-label" for="moviedesc">Description</label>
+			      <textarea class="form-control" id="movieDescription" ng-model="moviedetails.description" rows="3"></textarea>
+			    </div>
+
+			    <div class="form-group">
+				  <label class="col-form-label" for="moviegenre">Genre</label>
+				  <input type="text" class="form-control" id="movieGenre" ng-model="moviedetails.genre">
+				</div>
+
+		 		<div class="form-group">
+				  <label class="col-form-label" for="movieyear">Year</label>
+				  <input type="text" class="form-control" id="movieYear" ng-model="moviedetails.year">
+				</div>
+
+				<div class="form-group">
+				  <label class="col-form-label" for="movieruntime">Runtime (minutes)</label>
+				  <input type="text" class="form-control" id="movieRuntime" ng-model="moviedetails.runtime_minutes">
+				</div>	
+
+				<div class="form-group">
+				  <label class="col-form-label" for="movierating">Rating</label>
+				  <input type="text" class="form-control" id="movieRating" ng-model="moviedetails.rating">
+				</div>		
+
+ 				<!-- file upload -->
+ 				<div class="form-group">
+ 					<label class="col-form-label" for="picture">Upload Pictures</label>
+ 					<br>
+ 					<input type='file' multiple ng-file='uploadfiles' class="form-control-file" accept=".jpg" ><br/>
+ 					<!-- <input type='button' value='Upload' id='upload' ng-click='upload()' > -->
+ 
+ 					<!-- <p>{{ response.name }}</p> -->
+
+ 				</div>
+			    
+			    <button type="submit" class="btn btn-primary" ng-click="uploadAndAddMovieDetails()">Submit</button>
+		  	
+		</form>
+  </div>
+</div>
+</div> 
+</div><!-- ng-app -->
+
+
+<!-- Modal -->
+
+<div class="modal" id="messagemodal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p id="returnmsg"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- script -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+<!--movie data script-->
+<script src = "../js/movie.js"></script>
+<!-- <script src = "../js/fileupload.js"></script> -->
+</body>
+</html>

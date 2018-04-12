@@ -9,5 +9,8 @@ app.config(function($routeProvider) {
     })
     .when("/singup", {
         templateUrl : "../views/signup.html"
+    })
+    .when("/cart", {
+        templateUrl : "../views/cart.html"
     });
 });
