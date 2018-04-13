@@ -7,7 +7,8 @@ $requestParams = json_decode( $request_body, true );
 $username = $requestParams["username"];
 $password = $requestParams["password"];
 require_once('../includes/dbconnect.php');
-$sql = "select * from user where username = '$username' and passwordhash = '$password'";
+//$password = password_hash($password, PASSWORD_DEFAULT);
+$sql = "select * from user where username = '$username'";
 $result = $connection->query($sql);
 $login = 0;
 if ($result->num_rows > 0) {
@@ -15,13 +16,15 @@ if ($result->num_rows > 0) {
 			
 			$_SESSION["username"] = $row["username"];
 			$_SESSION["userid"] = $row["userid"];
+			$verify=password_verify($password,$row["passwordhash"]);
 			if($row["isadmin"]==0)
 			{
 				$_SESSION["isAdmin"] = 0;
 			}else{
 				$_SESSION["isAdmin"] = 1;
 				}
-			$login = 1;
+			if($verify)	
+				$login = 1;
 		
 		}
 		

@@ -8,7 +8,8 @@ $username = $requestParams["username"];
 $password = $requestParams["password"];
 $firstname = $requestParams["firstname"];
 $lastname = $requestParams["lastname"];
-
+$password = password_hash($password, PASSWORD_DEFAULT);
 $sql = "insert into user (username, firstname, lastname, passwordhash, isadmin) values('$username', '$firstname', '$lastname', '$password', 0)";
 $result = $connection->query($sql);
+
 ?>

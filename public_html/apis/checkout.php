@@ -1,9 +1,10 @@
 <?php 
 
 session_start();
+$orderStatus = 0;
+if(isset($_SESSION['userid'])){
 $userid = $_SESSION["userid"];
 require_once('../includes/dbconnect.php');
-
 $cartsql = "select m.title, m.movieid, m.genre,m.description,c.quantity from cart as c join moviedata as m on c.movieid = m.movieid where c.userid = '$userid'";
 $result = $connection->query($cartsql);
 $resultArray = array();
@@ -11,7 +12,6 @@ $orderid = uniqid();
 $purchaseSql = "";
 $inventorySql = "";
 $cartsql = "";
-$orderStatus = 0;
 if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
 		$movieid = $row["movieid"];
@@ -27,5 +27,9 @@ if ($result->num_rows > 0) {
 	}	
 	
 	echo $orderStatus;
+}else{
+	$orderStatus = 2;
+	echo $orderStatus;
+	}
 
 ?>

@@ -4,12 +4,16 @@
   <title>MovieStore</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
   
 </head>
 <body ng-app="myApp">
+<div id="header"></div>	
 <div class="container h-100">
   <div class="row h-100 justify-content-center align-items-center">
 	<form  ng-controller="loginController" ng-submit="submit()" >
@@ -32,6 +36,7 @@
 	</div>
 </div>	 
 </body>
+<script src='../js/header.js'></script>
 <script src='../js/config.js'></script>
 <script src='../js/login.js'></script>
 
