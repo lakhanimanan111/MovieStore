@@ -228,7 +228,6 @@ label {
   width: 35%;
 }
 
-<<<<<<< Updated upstream
 #myNavBar {
   top: 0;
   position: fixed;
@@ -236,7 +235,6 @@ label {
   z-index: 100;
 }
 
-=======
 .serviceBox1, .serviceBox2, .serviceBox3, .serviceBox4 {
     float:left;
     width: 22%;
@@ -248,4 +246,3 @@ label {
   width:1000px !important;
   height: 40px;
 }
->>>>>>> Stashed changes
