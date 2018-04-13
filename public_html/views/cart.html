@@ -5,11 +5,78 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-  
+  <link rel="stylesheet" type="text/css" href="../css/cart.css">
+  <script src='../js/config.js'></script>
+  <script src='../js/cart.js'></script>
 </head>
-<body ng-app="myApp">
+<body ng-app="myApp" ng-controller="cartController">
+	<header id="site-header">
+		<div class="container">
+			<h1>Shopping cart</h1>
+		</div>
+	</header>
+
+	<div class="container">
+
+		<section id="cart"> 
+			<article class="product" ng-repeat="movie in cart">
+				<header>
+					<a class="remove">
+						<img src="http://www.astudio.si/preview/blockedwp/wp-content/uploads/2012/08/1.jpg">
+
+						<h3>Remove product</h3>
+					</a>
+				</header>
+
+				<div class="content">
+
+					<h1>{{movie.title}}</h1>
+					{{movie.description}}
+				</div>
+
+				<footer class="content">
+					<span class="qt-minus">-</span>
+					<span class="qt">{{movie.quantity}}</span>
+					<span class="qt-plus">+</span>
+
+					<h2 class="full-price">
+						29.98$
+						<!-- {{movie.price * movie.quantity}} -->
+					</h2>
+
+					<h2 class="price">
+						14.99$
+						<!-- {{movie.price}} -->
+					</h2>
+				</footer>
+			</article>
+		</section>
+
+	</div>
+
+	<footer id="site-footer">
+		<div class="container clearfix">
+
+			<div class="left">
+				<h2 class="subtotal" ng-model="subTotal">Subtotal: <span>163.96</span>$</h2>
+				<h3 class="tax" ng-model="tax">Taxes (5%): <span>8.2</span>$</h3>
+				<h3 class="shipping" ng-model="shippingCost">Shipping: <span>5.00</span>$</h3>
+<!-- 				<h2 class="subtotal" ng-model="subTotal">Subtotal: <span>{{ getSubTotal() }}</span>USD</h2>
+				<h3 class="tax" ng-model="tax">Taxes (5%): <span>{{ 0.05 * subTotal}}</span>USD</h3>
+				<h3 class="shipping" ng-model="shippingCost">Shipping: <span>5.00</span>USD</h3> -->
+			</div>
+
+			<div class="right">
+				<h1 class="total">Total: <span>{{ getTotal() }}</span>$</h1>
+				<a class="btn" href="../views/checkout.html">Checkout</a>
+			</div>
+
+		</div>
+	</footer>
+
+
+
 </body>
-<script src='../js/config.js'></script>
+
 </html>
