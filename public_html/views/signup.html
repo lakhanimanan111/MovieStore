@@ -27,7 +27,8 @@
       <label class="col-form-label col-form-label-sm" for="inputSmall">Email address <span >*</span></label>
       <input type="text" class="form-control form-control-sm" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter email" ng-model="email" ng-required="true" ng-change="checkEmailValidity()" >
       <span ng-show="!email.length">Please enter something!</span>
-      <span class="error" ng-show="userValidEmail">Not valid email!</span>
+      <span class="error" ng-show="!userValidEmail">Not valid email!</span>
+      <span class="error" ng-show="usernameExists">The username already exists!</span>
     </div>
     
     <div class="form-group form-group-lg ">
