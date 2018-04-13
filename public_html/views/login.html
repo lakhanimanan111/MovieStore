@@ -10,19 +10,27 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-  
+  <style>
+  .transparent{
+		background-color: transparent;
+		opacity: 0.70;
+		}	
+		.textcolor{
+		 color: #fff;
+		}	
+  </style>
 </head>
 <body ng-app="myApp">
 
 <div class="container h-100">
 	<div id="header"></div>
 	
-  <div class="row h-100 justify-content-center align-items-center">
+  <div class="transparent textcolor row h-100 justify-content-center align-items-center">
 	<form  ng-controller="loginController" ng-submit="submit()" >
 	<fieldset>
-    <legend>Sign In</legend>
+    <legend >Sign In</legend>
     <div class="form-group ">
-      <label for="exampleInputEmail1">Email address</label>
+      <label class="textcolor" for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter email" ng-model="email">
       
     </div>
