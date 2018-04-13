@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MovieStore</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+  
+</head>
+<body>
+<div class = "row">
+<div class="col-lg-2">
+<div id="header"></div>
+</div>
+<div class="col-lg-10" ng-app="myApp" ng-controller="navBarController">	
+<nav class="nav nav-masthead">
+         
+         <form class="form-inline mt-2 mt-md-0 searchbar">
+           <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+         </form>
+         
+           <a class="nav-link active" href="#" ng-if="login">Cart</a>
+           <a class="nav-link" href="#" ng-if="admin">Edit Store</a>
+           <a class="nav-link" href="#" ng-if="!login">Sign Up</a>
+           <a class="nav-link" href="#" ng-if="!login">Login</a>
+           <a class="nav-link" href="#" ng-if="login">Logout</a>
+          
+         
+        
+         </nav>
+         </div>
+         </div>
+
+</body>
+<script src='../js/header.js'></script>
+<script src='../js/config.js'></script>
+<script src='../js/navbar.js'></script>
+</html>
