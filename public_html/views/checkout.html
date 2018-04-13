@@ -6,13 +6,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css">-->
- 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>-
+    <link href="../css/cover.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" ></script>
+  
   <style>
   .gallery {
 	  float: left;
@@ -24,22 +25,33 @@
 	.cartdetails {
 		margin-left:20px;
 	}
+	.textcolor{
+		 color: #fff;
+		}
+	.transparent{
+		background-color: transparent;
+		
+		opacity: 0.70;
+		}	
+	
   </style>
 </head>
 <body ng-app="myApp">
-	<div id="header"></div>
+	
+	
 	<div class="container">
+	<div id="navbar"></div>
 		<form  ng-controller="checkoutController" ng-submit="submit()" >	
 			<fieldset>
-			  <h2>Review Cart and Shipping Details</h2>
-			  <div id="checkoutDetails">
+			  <h2 class="textcolor">Review Cart and Shipping Details</h2>
+			  <div class="transparent" id="checkoutDetails">
 				<div class="card">
 				  <div class="card-header">
 					<a class="card-link" data-toggle="collapse" href="#cardDetails">
 					  Payment Information
 					</a>
 				  </div>
-				  <div id="cardDetails" class="collapse" data-parent="#checkoutDetails">
+				  <div id="cardDetails" class="collapse"  data-parent="#checkoutDetails">
 					<div class="card-body">
 						<div class="form-group ">
 							<label class="col-form-label col-form-label-sm" for="inputSmall" >Owner</label>
@@ -168,7 +180,7 @@
 				  </div>
 				  </div>
 				</div>
-				<div class="card">
+				<div class="card transparent">
 				  <div class="card-header">
 					<a class="collapsed card-link" data-toggle="collapse" href="#cartInformation">
 					  Cart Information
@@ -225,7 +237,7 @@
 		</form>
 	</div>
 </body>
-<script src='../js/header.js'></script>
+<script src='../js/headernavbar.js'></script>
 <script src='../js/config.js'></script>
 <script src='../js/checkout.js'></script>
 </html>
