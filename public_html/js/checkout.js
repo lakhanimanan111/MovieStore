@@ -6,7 +6,12 @@ app.controller('checkoutController',['$scope', '$http', '$window',function($scop
 	$scope.login = response.data.isLogin;		
 	$scope.admin = response.data.isAdmin;	 
 	 
-});
+	});
+	$scope.logout = function(){
+	$http.get("../apis/logout.php").then(function(response) {
+	$window.location.href = '../views/login.html';
+	});
+	};
 	
 	$scope.totalCost = 0;
 	$http.get("../apis/cartinfo.php").then(function(response) {	
