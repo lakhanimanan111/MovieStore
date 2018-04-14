@@ -1,6 +1,13 @@
 var app = angular.module("myApp", []);
 	
 app.controller('checkoutController',['$scope', '$http', '$window',function($scope, $http, $window) {
+	
+	$http.get("../apis/session.php").then(function(response) {
+	$scope.login = response.data.isLogin;		
+	$scope.admin = response.data.isAdmin;	 
+	 
+});
+	
 	$scope.totalCost = 0;
 	$http.get("../apis/cartinfo.php").then(function(response) {	
 	 if(response.data != 0){

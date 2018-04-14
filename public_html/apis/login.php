@@ -11,7 +11,7 @@ require_once('../includes/dbconnect.php');
 $sql = "select * from user where username = '$username'";
 $result = $connection->query($sql);
 $login = 0;
-$_SESSION["isLoggedIn"] = 0;
+$_SESSION["isLoggedIn"] = false;
 if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
 			
@@ -21,13 +21,13 @@ if ($result->num_rows > 0) {
 			$verify=password_verify($password,$row["passwordhash"]);
 			if($row["isadmin"]==0)
 			{
-				$_SESSION["isAdmin"] = 0;
+				$_SESSION["isAdmin"] = false;
 			}else{
-				$_SESSION["isAdmin"] = 1;
+				$_SESSION["isAdmin"] = true;
 				}
 			if($verify)	{
 				$login = 1;
-				$_SESSION["isLoggedIn"] = 1;
+				$_SESSION["isLoggedIn"] = true;
 				}
 		
 		}
