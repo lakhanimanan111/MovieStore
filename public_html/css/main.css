@@ -235,9 +235,9 @@ label {
   z-index: 100;
 }
 
-.serviceBox1, .serviceBox2, .serviceBox3, .serviceBox4 {
+.serviceBox1, .serviceBox2, .serviceBox3, .serviceBox4, .serviceBox5 {
     float:left;
-    width: 22%;
+    width: 18%;
     margin-right: 15px;
 }
 

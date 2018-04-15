@@ -5,42 +5,77 @@ app.controller('mainController', ['$scope', '$http', '$window', function($scope,
 	,$scope.numPerPage = 10
 	,$scope.maxSize = 5
 	,$scope.cart = []
-	,$scope.count = 0;
-	//,$scope.isDisabled = false;
+	,$scope.count = 0
+	,$scope.login = false;
+
+
+	$http.get("../apis/session.php").then(function(response) {
+		$scope.login = response.data.isLogin;
+	});
+
+	$http.get("../apis/getCountTempCart.php").then(function(response) {
+			$scope.count = (response.data.length == 2) ? 0 : parseInt(response.data);
+		});
+
+	$scope.logout = function(){
+		$http.get("../apis/logout.php").then(function(response) {
+			$window.location.href = '../views/login.html';
+		});
+	};
 
 	$scope.search = function() {		
-		//$scope.movieList = [];
+		
 		var data = {
 			searchString: $scope.searchText,
 		};
 
-		//alert(data.searchString);
 		$http.post("../apis/search.php", data).then(function(response) {
-						if(!response.data == []) {
-							$scope.movieList =  response.data;
-							$scope.currentPage = 1;
-						}
-				    })
+				if(!response.data == []) {
+					$scope.movieList =  response.data;
+					$scope.currentPage = 1;
+				}
+		    })
 	}
 
 	$scope.addToCart = function(movie) {
-		//alert(movie.title);
-		$scope.cart.push(movie);
-		//$scope.count = $scope.count+1;
-		var data = {
-			movieObject: movie,
-		};
+        if(!$scope.login) {
 
-		$http.post("../apis/addToCart.php", data).then(function(response) {
-			//console.log("Add to cart status: " + response.data);
-			if (response.data == 0) {
-				$window.location.href = '../views/login.html';
-			} else {
-				$scope.count = $scope.count + 1;
-				//$scope.isDisabled = true;
-				movie.disabled = true;
-			}
-		})
+            alert("User has not logged in");
+            $window.location.href = '../views/login.html';
+
+        } else {
+
+			var data = {
+				movieObject: movie,
+			};
+
+			$http.post("../apis/addToCart.php", data).then(function(response) {
+					$scope.count == "" ? 0 : parseInt($scope.count);
+					$scope.count = parseInt($scope.count) + 1;
+					movie.disabled = true;
+			});
+
+        }
+		
+	}
+
+	$scope.buy = function(movie) {
+		if(!$scope.login) {
+
+            alert("User has not logged in");
+            $window.location.href = '../views/login.html';
+
+        } else {
+
+        	var data = {
+				movieObject: movie,
+			};
+
+        	$http.post("../apis/buyMovie.php", data).then(function(response) {
+        		$window.location.href = "../views/checkout.html";
+        	});
+        }
+
 	}
 
 	$scope.$watch('currentPage + numPerPage + movieList.length', function() {

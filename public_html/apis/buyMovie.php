@@ -7,12 +7,6 @@
 	session_start();
 	$userid = $_SESSION["userid"];
 
-	//Check of if user has logged in
-	/*if(!isset($userid)) {
-		echo $updateStatus;
-		return;
-	}*/
-
 	$request_body = file_get_contents('php://input');
 	$requestParams = json_decode( $request_body, true );
 	$movieObject = $requestParams["movieObject"];
@@ -33,7 +27,7 @@
 	}
 
 	//update cart with the selected movie
-	$sqlInsertIntoCart = "insert into tempcart (userId, movieId, quantity) values ($userid, $movieId, 1)";
+	$sqlInsertIntoCart = "insert into cart (userId, movieId, quantity) values ($userid, $movieId, 1)";
 	//$sqlInsertIntoCart = "insert into cart (userId, movieId, quantity) values (1, $movieId, 1)";
 	$resultInsertIntoCart = $connection->query($sqlInsertIntoCart);
 	if ($resultInsertIntoCart === TRUE) {
