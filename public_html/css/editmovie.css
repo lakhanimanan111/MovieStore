@@ -2,3 +2,17 @@
 	width: 100px;
 	height: 150px;
 }
+
+.textcolor {
+	color :white;
+}
+
+.adminheader {
+	height: 50px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.col-form-label {
+	color: white;
+}

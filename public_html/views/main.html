@@ -5,44 +5,70 @@
 		<title>MovieStore</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		<script data-require="ui-bootstrap@*" data-semver="0.12.1" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
-		<script src="../js/config.js"></script>
+		<!-- <script src="../js/config.js"></script> -->
 		<script src='../js/search.js'></script>		
-		<link rel="stylesheet" type="text/css" href="../css/main.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	</head>
-	<body ng-app="myApp" ng-controller="mainController">
 
-		<nav class="navbar navbar-default">
-		  <div class="container-fluid">
-		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">WebSiteName</a>
+		<link rel="stylesheet" type="text/css" href="../css/main.css">
+		<link rel="stylesheet" type="text/css" href="../css/cover.css">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+		<style >
+			.inner h3, h1 {
+				color:white;
+				font-size:30px;
+				text-align-last: center;
+			}
+			.nav-link {
+				font-size:15px;
+				margin-left: 5px;
+			}
+
+		</style>
+	</head>
+	<body ng-app="myApp" ng-controller="mainController" class="container panel">
+	<div class="panel-body">
+		
+		  	<div class = "row">
+			<div class="col-lg-2 inner">
+
+			    
+			        <h3 class="masthead-brand">Filmsgalore </h3>
+			        
+				
+			 </div>
+			<div class="col-lg-10">	
+			<nav class="nav nav-masthead">
+			         
+		         <form class="form-inline mt-2 mt-md-0 searchbar" role="search" ng-submit="search()" id="navBarSearchForm">
+		           <input class="transparent mr-sm-2" type="text" aria-label="Search" placeholder="Search" ng-model="searchText">
+		           <button class="btn btn-outline-success my-2 my-sm-0" type="submit" ><span class="fa fa-search"></span></button>
+		         </form>
+		         
+		           <a class="nav-link" href="cart.html" ng-if="login">
+		           	<!-- <span class="fa fa-shopping-cart-white"></span><sup><span class="badge">{{count}}</span</sup>  -->
+		           	Cart</a>
+		           <a class="nav-link" href="editmovie.html" ng-show="admin">Edit Store</a>
+		           <a class="nav-link" href="signup.html" ng-show="!login" >Sign Up</a>
+		           <a class="nav-link" href="login.html" ng-show="!login">Login</a>
+		           <a class="nav-link" href="#" ng-show="login" ng-click="logout()">Logout</a>
+		        
+		    </nav>
 		    </div>
-		    <ul class="nav navbar-nav">
-		    	<li class="active"><a href="#">Home</a></li>
-		    	<li><a href="#">Page 1</a></li>
-		    	<li><a href="#">Page 2</a></li>
-			</ul>
-		    <ul class="nav navbar-nav navbar-right">
-		    	<li>
-		    		<form class="navbar-form navbar-left" role="search" ng-submit="search()" id="navBarSearchForm">
-					    <div class="form-group">
-					        <input type="text" placeholder="Search" ng-model="searchText">
-					    </div>
-					    <button type="submit" class="btn btn-default">
-					        <span class="glyphicon glyphicon-search"></span>
-					    </button>
-					</form>
-		    	</li>
-		    	<li ng-show="login"><a href="./cart.html"><span class="glyphicon glyphicon-shopping-cart"></span><sup><span class="badge">{{count}}</span></sup></a></li>
-		    	<li ng-show="!login"><a href="./signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-		      	<li ng-show="!login"><a href="./login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-		      	<li ng-show="login" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</li>
-		    </ul>
-		  </div>
-		</nav>
+		    </div>
+
+		<div class="inner cover panel-body" id="defaulttext" ng-show="filteredMovieList.length == 0">
+			 <h1 class="cover-heading">Hmmm...there seems to be no search results. Why don't you try typing in the search box above?</h1>
+		</div>
 
 		<div class="search__container" ng-show="filteredMovieList.length > 0">
 			<div class="dataFilter">
@@ -98,10 +124,10 @@
 				    <p class="text--medium">{{movie.price | currency }}</p>
 				  </div>
 				  <div class="search-item__options">
-				    <button class="button button--outline button--small" ng-disabled="movie.disabled" ng-click="addToCart(movie)">Add to Cart</>
+				    <button class="btn btn-primary" ng-disabled="movie.disabled" ng-click="addToCart(movie)">Add to Cart</>
 				  </div>
 				  <div class="search-item__options">
-				    <button class="button button--outline button--small" ng-click="buy(movie)">Buy</>
+				    <button class="btn btn-primary" ng-click="buy(movie)">Buy</>
 				  </div>
 				</li>
 
@@ -109,13 +135,16 @@
 
 		</div>
 
+		<center>
 		<pagination
 		ng-model="currentPage"
 		total-items="movieList.length"
 		max-size="maxSize"  
-		boundary-links="true">
+		boundary-links="false" ng-if="movieList">
 		</pagination>
+		<center>
 
+	</div>
 	</body>
 
 </html>

@@ -25,6 +25,19 @@ app.directive('ngFile', ['$parse', function ($parse) {
 
 app.controller ( "ModifyMovieController", ['$scope', '$http', '$window', '$location',
     function($scope, $http, $window, $location) {
+
+       $http.get("../apis/session.php").then(function(response) {
+  $scope.login = response.data.isLogin;   
+  $scope.admin = response.data.isAdmin;  
+   
+  });
+  
+  $scope.logout = function(){
+  $http.get("../apis/logout.php").then(function(response) {
+  $window.location.href = '../views/cover.html';
+  });
+  };
+
     var isMovieEdited = false;
 
     $scope.getMovie = function () {

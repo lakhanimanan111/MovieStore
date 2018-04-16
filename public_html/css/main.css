@@ -2,6 +2,10 @@ html * {
   box-sizing: border-box;
 }
 
+body {
+  font-size: 15px;
+}
+
 p {
   margin: 5px 0;
   font-weight: 300;
@@ -79,7 +83,7 @@ p {
   order: 1;
   width: 34px;
   height: 34px;
-  background-color: red;
+  background-color: #1450a3 ;
   border-radius: 8px;
   margin-right: 15px;
   background-size: cover;
@@ -114,7 +118,7 @@ p {
 }
 
 .label--red {
-  background-color: #FF4747;
+  background-color: #1450a3;
   color: #FFFFFF;
 }
 
@@ -238,11 +242,19 @@ label {
 .serviceBox1, .serviceBox2, .serviceBox3, .serviceBox4, .serviceBox5 {
     float:left;
     width: 18%;
-    margin-right: 15px;
+    margin-left: 15px;
+    /*margin-left: 5px;*/
+    /*margin: 10px;*/
 }
 
 #navBarSearchForm input[type=text]
 {
-  width:1000px !important;
+  /*width:1000px !important;*/
   height: 40px;
+  color: white;
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
 }
+
+

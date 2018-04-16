@@ -9,7 +9,7 @@ app.controller('checkoutController',['$scope', '$http', '$window',function($scop
 	});
 	$scope.logout = function(){
 	$http.get("../apis/logout.php").then(function(response) {
-	$window.location.href = '../views/login.html';
+	$window.location.href = '../views/cover.html';
 	});
 	};
 	
