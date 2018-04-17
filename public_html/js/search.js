@@ -42,8 +42,7 @@ app.controller('mainController', ['$scope', '$http', '$window', function($scope,
 
 	$scope.addToCart = function(movie) {
         if(!$scope.login) {
-
-            alert("User has not logged in");
+        	
             $window.location.href = '../views/login.html';
 
         } else {
@@ -80,17 +79,5 @@ app.controller('mainController', ['$scope', '$http', '$window', function($scope,
         }
 
 	}
-
-/*	$scope.$watch('currentPage + numPerPage + movieList.length', function() {
-
-		if($scope.currentPage > 0) {
-		    var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-		    , end = begin + $scope.numPerPage;
-		    
-		    $scope.filteredMovieList = $scope.movieList.slice(begin, end);
-
-		}
-    
-  });*/
 
 }]); 

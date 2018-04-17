@@ -4,15 +4,15 @@ app.controller('cartController',['$scope', '$http', '$window',function($scope, $
 
    $scope.logout = function(){
         $http.get("../apis/logout.php").then(function(response) {
-            $window.location.href = '../views/login.html';
+            $window.location.href = '../views/cover.html';
         });
     };
 
     $http.get("../apis/session.php").then(function(response) {
         $scope.login = response.data.isLogin;
-        if(!$scope.login) {
+        $scope.admin = response.data.isAdmin;    
 
-            alert("User has not logged in");
+        if(!$scope.login) {
             $window.location.href = '../views/login.html';
 
         } else {

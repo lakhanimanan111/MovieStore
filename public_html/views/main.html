@@ -15,7 +15,7 @@
 
 		<link rel="stylesheet" type="text/css" href="../css/main.css">
 		<link rel="stylesheet" type="text/css" href="../css/cover.css">
-
+		<link rel="stylesheet" type="text/css" href="../css/common.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 
@@ -41,8 +41,35 @@
 		  	<div class = "row">
 			<div class="col-lg-2 inner">
 
+				      <h3 class="masthead-brand">Filmsgalore </h3>
+			        
+				
+			 </div>
+			<div class="col-lg-10">	
+			<nav class="nav nav-masthead">
+			         
+		         <form class="form-inline mt-2 mt-md-0 searchbar" role="search" ng-submit="search()" id="navBarSearchForm">
+		           <input class="transparent mr-sm-2" type="text" aria-label="Search" placeholder="Search" ng-model="searchText">
+		           <button class="btn btn-outline-success my-2 my-sm-0" type="submit" ><span class="fa fa-search"></span></button>
+		         </form>
+		         
+		           <a class="nav-link" href="cart.html" ng-if="login">
+		           	<!-- <span class="fa fa-shopping-cart-white"></span><sup><span class="badge">{{count}}</span</sup>  -->
+		           	Cart</a>
+		           <a class="nav-link" href="editmovie.html" ng-show="admin">Edit Store</a>
+		           <a class="nav-link" href="signup.html" ng-show="!login" >Sign Up</a>
+		           <a class="nav-link" href="login.html" ng-show="!login">Login</a>
+		           <a class="nav-link" href="#" ng-show="login" ng-click="logout()">Logout</a>
+		        
+		    </nav>
+		    </div>
+		    </div>
 
-		<nav class="navbar navbar-default transparent" style="margin-bottom: 0px">
+		<div class="inner cover panel-body" id="defaulttext" ng-if="!filteredMovieList">
+			 <h1 class="cover-heading">Hmmm...there seems to be no search results. Why don't you try typing in the search box above?</h1>
+		</div>
+
+		<!-- <nav class="navbar navbar-default transparent" style="margin-bottom: 0px">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
 		      <a class="navbar-brand" href="#">WebSiteName</a>
@@ -70,10 +97,10 @@
 		      	<li ng-show="login"><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
 		    </ul>
 		  </div>
-		</nav>
+		</nav> -->
 
 		<div class="search__container" ng-show="filteredMovieList.length > 0">
-			<div class="dataFilter">
+			<div class="dataFilter transparent">
 				<div class="serviceBox1" >		
 					<div class="box">			
 						<input type="text" class="form-control" ng-model="query.title" placeholder="Search Title" />
@@ -102,10 +129,14 @@
 			</div>
 
 
-			<ul class="card">
+			<ul class="card transparent">
 				<!-- <li class="search-item" ng-repeat="movie in filteredMovieList | filter:query"> -->
-				<li class="search-item" ng-repeat="movie in filteredMovieList = (movieList | filter : query) | limitTo:10:10*(currentPage-1)">
-				  <div class="search-item__image" style="background-image: url(../images/{{movie.imageurl}});"></div>
+				<li class="search-item" ng-repeat="movie in filteredMovieList = (movieList | filter : query) | limitTo:7:7*(currentPage-1)">
+				  <!-- <div class="search-item__image" style="background-image: url(../images/{{movie.imageurl}});"></div> -->
+				  <div>
+				    <img class="search-item__image" src="../images/{{movie.imageurl}}" ng-if="movie.imageurl">
+				    <img class="search-item__image" src="../images/NoImage.jpeg" ng-if="!movie.imageurl">
+				  </div>
 				  <div class="search-item__options title">
 				    <p class="text--medium">{{movie.title}}
 				        <span class="label label--red text--upcase">
@@ -127,13 +158,13 @@
 				    <p class="text--medium">{{movie.price | currency }}</p>
 				  </div>
 				  <div class="search-item__options">
-				    <button ng-show="movie.stockavailable > 0" class="button button--outline button--small" ng-disabled="movie.disabled" ng-click="addToCart(movie)">Add to Cart</>
+				    <button ng-show="movie.stockavailable > 0" class="btn btn-primary" ng-disabled="movie.disabled" ng-click="addToCart(movie)">Add to Cart</>
 				  </div>
 				  <div class="search-item__options text-danger" ng-show="movie.stockavailable == 0">
 				  	Currently not available
 				  </div>
 				  <div class="search-item__options">
-				    <button ng-show="movie.stockavailable > 0" class="button button--outline button--small" ng-click="buy(movie)">Buy</>
+				    <button ng-show="movie.stockavailable > 0" class="btn btn-primary" ng-click="buy(movie)">Buy</>
 				  </div>
 				</li>
 
@@ -142,13 +173,15 @@
 		</div>
 
 		<center>
+	 	<div class="transparent" ng-show="filteredMovieList">
 		<pagination
 		ng-model="currentPage"
 		total-items="filteredMovieList.length"
 		max-size="maxSize"  
-		boundary-links="false">
+		boundary-links="true">
 
 		</pagination>
+	    </div>
 		<center>
 
 	</div>
