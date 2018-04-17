@@ -8,7 +8,7 @@
 	require_once('../includes/dbconnect.php');
 	/*$sql = "select movieid, title, genre, description, actors, director, rating, year, runtime_minutes, price from moviedata where title like '%$searchString%'";*/
 
-	$sql = "select m.movieid, m.title, m.genre, m.description, m.rating, m.year, m.runtime_minutes, m.price, (SELECT imageurl FROM movieimages WHERE movieid = m.movieid limit 1) as imageurl from moviedata as m where m.title like '%$searchString%'";
+	$sql = "select m.movieid, m.title, m.genre, m.description, m.rating, m.year, m.runtime_minutes, m.price, (SELECT imageurl FROM movieimages WHERE movieid = m.movieid limit 1) as imageurl, (SELECT stockavailable from inventory where movieid = m.movieid) as stockavailable from moviedata as m where m.title like '%$searchString%'";
 	
 	mysqli_set_charset($connection, 'utf8mb4');
 	$result = $connection->query($sql);

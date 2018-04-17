@@ -28,9 +28,10 @@ app.controller('checkoutController',['$scope', '$http', '$window',function($scop
     });
     
     
-    $scope.go = function () {
+    /*$scope.go = function () {
 		$window.location.href = '../views/cart.html';
-	};
+	}*/
+	
    $scope.failure = false; 
    $scope.submit = function() { 
    $http.post("../apis/checkout.php")

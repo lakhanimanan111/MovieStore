@@ -19,9 +19,10 @@ if ($result->num_rows > 0) {
 		$purchaseSql .= "insert into purchasehistory (userid, movieid, quantitypurchased, orderid) values ($userid, $movieid,$quantity, '$orderid'); ";
 		$inventorySql .= "update inventory set stockavailable = stockavailable - $quantity where movieid = $movieid;";
 		$cartsql .= "delete from cart where userid = $userid;";
+		$sqlDelete = "delete from tempcart;";
 		}
 	}
-	$sql = $purchaseSql . $inventorySql . $cartsql;
+	$sql = $purchaseSql . $inventorySql . $cartsql . $sqlDelete;
 	if ($connection->multi_query($sql) === TRUE) {
 		$orderStatus = 1;
 	}	

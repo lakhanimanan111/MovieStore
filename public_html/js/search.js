@@ -78,7 +78,7 @@ app.controller('mainController', ['$scope', '$http', '$window', function($scope,
 
 	}
 
-	$scope.$watch('currentPage + numPerPage + movieList.length', function() {
+/*	$scope.$watch('currentPage + numPerPage + movieList.length', function() {
 
 		if($scope.currentPage > 0) {
 		    var begin = (($scope.currentPage - 1) * $scope.numPerPage)
@@ -88,6 +88,6 @@ app.controller('mainController', ['$scope', '$http', '$window', function($scope,
 
 		}
     
-  });
+  });*/
 
 }]); 

@@ -12,15 +12,16 @@
   <script src='../js/cart.js'></script>
 </head>
 <body ng-app="myApp" ng-controller="cartController">
-	<header id="site-header">
+	<header id="site-header" style="background-color: powderblue">
 		<div class="container">
-			<h1>Shopping cart</h1> <h3 ng-click="logout()"><span  class="glyphicon glyphicon-log-out"></span> Log Out</h3>
+			<h2 style="float: left">Shopping cart</h2> 
+			<h2 style="float: right" ng-click="logout()"><span  class="glyphicon glyphicon-log-out"></span> Log Out</h2>
 		</div>
 		
 	</header>
 
 	<div class="container" ng-show="cart.length == 0">
-		There are no items in cart!
+		<h1>There are no items in cart!</h1>
 	</div>
 
 	<div class="container">
@@ -64,15 +65,14 @@
 
 				<div class="left">
 					<h2 class="subtotal" ng-model="subTotal">Subtotal: {{ getSubTotal() | currency }}</h2>
-					<h3 class="tax" ng-model="tax">Taxes (5%): ${{ (0.05 * getSubTotal()) | number : 2}}</h3>
-					<h3 class="shipping" ng-model="shippingCost">Shipping: $5.00</h3>
+					<h3 class="tax" ng-model="tax">Taxes (8.25%): ${{ (0.825 * getSubTotal()) | number : 2}}</h3>
+					<h3 class="shipping" ng-model="shippingCost">Shipping: $4.99</h3>
 				</div>
 
 				<div class="right">
 					<h1 class="total">Total: <span>${{ getTotal() }}</span></h1>
-					<!-- <a class="btn" href="../views/checkout.html">Checkout</a> -->
-					<button class="btn" ng-click="checkout()">Checkout</button>
-					<a href="./main.html">Back to Shopping</a>
+					<button ng-disabled="cart.length == 0" class="btn" style="width: 100%;" ng-click="checkout()">Checkout</button>
+					<a href="./main.html"><center>Continue Shopping </center></a>
 				</div>
 
 			</div>

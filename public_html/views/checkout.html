@@ -233,14 +233,14 @@
 							
 							<div class="col">
 								
-									<legend>Total Cost : ${{totalCost * 1.05 + 5}}</legend>
+									<legend>Total Cost : ${{(totalCost * 1.05 + 5) | number : 2}}</legend>
 									
 									<legend>Shipping Information</legend>
 									<p>{{address + " " + apartmentnumber + " " + city + " " + state + " " + zipcode}}</p>
 								
 								
 									<p class="lead">
-										<button ng-click="go()" class="btn btn-primary">Update Cart</button>
+										<!-- <button ng-click="go()" class="btn btn-primary">Update Cart</button> -->
 										<button type="submit" class="btn btn-primary">Place Order</button>										
 									</p>
 								

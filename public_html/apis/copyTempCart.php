@@ -12,10 +12,10 @@
 	
 	if ($resultinsert === TRUE) {
 			
-		$sqlDelete = "delete from tempcart";
+		/*$sqlDelete = "delete from tempcart";
 		$resultDelete = $connection->query($sqlDelete);
 
-		if($resultDelete == TRUE)
+		if($resultDelete == TRUE)*/
 			echo 1;
 	}
 

@@ -39,7 +39,7 @@ app.controller('cartController',['$scope', '$http', '$window',function($scope, $
 
     $scope.addQuantity = function(movie) {
         movie.subDisabled = false;
-        if(movie.quantity < 5) {
+        if(movie.quantity < movie.stockavailable) {
             movie.quantity = parseInt(movie.quantity) + 1;
             var data = {
                         movieid: movie.movieid,
@@ -85,9 +85,9 @@ app.controller('cartController',['$scope', '$http', '$window',function($scope, $
     	console.log("subTotal" + $scope.subTotal);
     	var total = 0;
         var subTotal = $scope.getSubTotal();
-    	total =  parseFloat(subTotal) + parseFloat(0.05*subTotal);
+    	total =  parseFloat(subTotal) + parseFloat(0.825*subTotal);
         if(total != 0){
-            total = total + parseFloat(5.00);
+            total = total + parseFloat(4.99);
         }  
     	return total.toFixed(2);
     }

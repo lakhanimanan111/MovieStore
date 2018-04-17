@@ -15,7 +15,7 @@
 	</head>
 	<body ng-app="myApp" ng-controller="mainController">
 
-		<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default transparent" style="margin-bottom: 0px">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
 		      <a class="navbar-brand" href="#">WebSiteName</a>
@@ -29,17 +29,18 @@
 		    	<li>
 		    		<form class="navbar-form navbar-left" role="search" ng-submit="search()" id="navBarSearchForm">
 					    <div class="form-group">
-					        <input type="text" placeholder="Search" ng-model="searchText">
+					        <input type="text" placeholder="Search" ng-model="searchText" style="float: left">
+					        <button type="submit" class="btn btn-default" style="height: 40px">
+					        	<span class="glyphicon glyphicon-search"></span>
+					    	</button>
 					    </div>
-					    <button type="submit" class="btn btn-default">
-					        <span class="glyphicon glyphicon-search"></span>
-					    </button>
+					  
 					</form>
 		    	</li>
 		    	<li ng-show="login"><a href="./cart.html"><span class="glyphicon glyphicon-shopping-cart"></span><sup><span class="badge">{{count}}</span></sup></a></li>
 		    	<li ng-show="!login"><a href="./signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 		      	<li ng-show="!login"><a href="./login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-		      	<li ng-show="login" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</li>
+		      	<li ng-show="login"><a href="#" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
 		    </ul>
 		  </div>
 		</nav>
@@ -75,7 +76,8 @@
 
 
 			<ul class="card">
-				<li class="search-item" ng-repeat="movie in filteredMovieList | filter:query">
+				<!-- <li class="search-item" ng-repeat="movie in filteredMovieList | filter:query"> -->
+				<li class="search-item" ng-repeat="movie in filteredMovieList = (movieList | filter : query) | limitTo:10:10*(currentPage-1)">
 				  <div class="search-item__image" style="background-image: url(../images/{{movie.imageurl}});"></div>
 				  <div class="search-item__options title">
 				    <p class="text--medium">{{movie.title}}
@@ -98,10 +100,13 @@
 				    <p class="text--medium">{{movie.price | currency }}</p>
 				  </div>
 				  <div class="search-item__options">
-				    <button class="button button--outline button--small" ng-disabled="movie.disabled" ng-click="addToCart(movie)">Add to Cart</>
+				    <button ng-show="movie.stockavailable > 0" class="button button--outline button--small" ng-disabled="movie.disabled" ng-click="addToCart(movie)">Add to Cart</>
+				  </div>
+				  <div class="search-item__options text-danger" ng-show="movie.stockavailable == 0">
+				  	Currently not available
 				  </div>
 				  <div class="search-item__options">
-				    <button class="button button--outline button--small" ng-click="buy(movie)">Buy</>
+				    <button ng-show="movie.stockavailable > 0" class="button button--outline button--small" ng-click="buy(movie)">Buy</>
 				  </div>
 				</li>
 
@@ -111,9 +116,9 @@
 
 		<pagination
 		ng-model="currentPage"
-		total-items="movieList.length"
+		total-items="filteredMovieList.length"
 		max-size="maxSize"  
-		boundary-links="true">
+		boundary-links="false">
 		</pagination>
 
 	</body>
