@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test page</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
+	<script src="https://unpkg.com/ng-table@2.0.2/bundles/ng-table.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="https://unpkg.com/ng-table/bundles/ng-table.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css">
+</head>
+<body ng-app="myApp" ng-controller="searchController">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" href="#">Navbar</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation" style="">
+		<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav mr-auto">
+			  <li class="nav-item active">
+				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="#">Features</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="#">Pricing</a>
+			  </li>
+			  <li class="nav-item">
+				<a class="nav-link" href="#">About</a>
+			  </li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0" ng-submit="search()" >
+			  <input class="form-control mr-sm-2" type="text" placeholder="Search" name="searchText" ng-model="searchText">
+			  <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+
+	<div>
+		<div>
+			<table ng-table="tableParams" class="table table-condensed table-bordered table-striped table-hover">
+
+				<tr class="table-active" ng-repeat="user in $data">
+	            	<td title="'Title'" filter="{ Title: 'text'}" sortable="'Title'">{{user.title}}</td>
+					<td title="'Genre'" filter="{ genre: 'text'}" sortable="'genre'">{{user.genre}}</td>
+					<td title="'Description'" filter="{ description: 'text'}" sortable="'description'">{{user.description}}</td>
+					<td title="'Year'" filter="{ year: 'number'}" sortable="'year'">{{user.year}}</td>
+					<td title="'Duration'" filter="{ runtime_minutes: 'number'}" sortable="'runtime_minutes'">{{user.runtime_minutes}}</td>
+					<td title="'Rating'" filter="{ rating: 'number'}" sortable="'rating'">{{user.rating}}</td>
+					<td><button type="button" class="btn btn-primary">Add to Cart</button></td>
+					<td><button type="button" class="btn btn-success">Buy</button></td>
+	    		</tr>		  		
+			</table>
+		</div>
+	</div>
+	<script type="text/javascript">
+
+		/*
+		var app = angular.module("myApp", ["ngTable"]);		
+		app.controller('demoController',['$scope', 'NgTableParams', function($scope, NgTableParams) {
+			var self = this;
+			var data = [{name: "Moroni", age: 50} , 
+						{name: "Simon", age: 43}, 
+						{name: "Jacob", age: 27}, 
+						{name: "Nephi", age: 29}, 
+						{name: "Christian", age: 34}
+						];
+			self.tableParams = new NgTableParams({sorting: { name: "asc" } }, { dataset: data});
+		}]);
+		*/
+		/*
+		var app = angular.module("myApp", ["ngTable"]);		
+		app.controller('demoController', ['$scope', '$http', '$filter', 'NgTableParams', function($scope, $http, $filter, NgTableParams) {
+			$scope.search = function() {				
+				var data = {
+					searchString: $scope.searchText,
+				};
+				alert(data.searchString);
+				console.log("Outside Getdata");
+
+				$scope.tableParams = new NgTableParams({}, { getData: function(params){	
+					console.log("Inside Getdata: " + $scope.tableParams);
+
+					if($scope.tableParams.data.length == 0) {
+
+						return $http.post("../apis/search.php", data).then(function(response) {
+								console.log("Inside Post:  " + response.data);
+								//response.data = params.sorting() ? $filter('orderBy')($scope.tableParams, params.orderBy()) : $scope.tableParams;
+								
+									//if(!response.data == []) {
+									//$scope.movieList = response.data;
+									//self.tableParams = new NgTableParams({sorting: { Title: "asc" } }, { dataset: response.data});
+										return response.data;
+									//}
+				    		});
+					} else {
+						//var result = params.sorting() ? $filter('orderBy')($scope.tableParams, params.orderBy()) : $scope.tableParams;
+						console.log(params.filter());
+						var result = params.filter() ? $filter('filter')($scope.tableParams.data, params.filter()) : $scope.tableParams.data;
+						return result;
+					}	
+				}});
+				*/
+				
+				/*
+				$http.post("../apis/search.php", data).then(function(response) {
+					//console.log("JS:  " + response.data);
+					if(!response.data == []) {
+						//$scope.movieList = response.data;
+						$scope.tableParams = new NgTableParams({sorting: { Title: "asc" } }, { dataset: response.data});
+
+					}
+			    });
+			    
+				*/
+
+
+
+				var app = angular.module("myApp", ["ngTable"]);		
+				app.controller('searchController', ['$scope', '$http', '$filter', 'NgTableParams', function($scope, $http, $filter, NgTableParams) {
+						$scope.search = function() {				
+						var data = {
+							searchString: $scope.searchText,
+						};
+
+						$http.post("../apis/search.php", data).then(function(response) {
+		  					$scope.data = response.data;
+
+							$scope.tableParams = new NgTableParams(
+
+								{
+									page: 1,            // show first page
+									count: 10          // count per page
+								}, 
+
+								{
+
+									total: $scope.data.length, // length of data
+									getData: function(params) {
+										
+										var theData = angular.copy($scope.data);
+
+										var filterObj = params.filter(),
+										filteredData = $filter('filter')($scope.data, filterObj);
+
+										
+										Object.keys(filterObj).forEach(function (property) {
+										    if (filterObj[property] === null) {
+										      	//filteredData = $scope.data;
+										      	delete filterObj[property];
+										      	$scope.tableParams.reload();
+										    }
+									 	});
+									 	filteredData = $filter('filter')($scope.data, filterObj);
+										
+
+										var sortObj = params.sorting(),
+										orderedData = $filter('orderBy')(filteredData, sortObj);
+
+										
+										Object.keys(filterObj).forEach(function (property) {
+										    if (filterObj[property] === null) {
+										      //orderedData = $scope.data;
+										      delete filterObj[property];
+										      $scope.tableParams.reload();
+										    }
+									 	});
+									 	
+
+										return orderedData;
+									}
+
+			  					});
+						});
+
+						}
+			
+				}]);
+	</script>
+</body>
+</html>

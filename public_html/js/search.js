@@ -10,7 +10,9 @@ app.controller('mainController', ['$scope', '$http', '$window', function($scope,
 
 
 	$http.get("../apis/session.php").then(function(response) {
-		$scope.login = response.data.isLogin;
+		$scope.login = response.data.isLogin;		
+		$scope.admin = response.data.isAdmin;	 
+	 
 	});
 
 	$http.get("../apis/getCountTempCart.php").then(function(response) {
@@ -19,9 +21,10 @@ app.controller('mainController', ['$scope', '$http', '$window', function($scope,
 
 	$scope.logout = function(){
 		$http.get("../apis/logout.php").then(function(response) {
-			$window.location.href = '../views/login.html';
+			$window.location.href = '../views/cover.html';
 		});
 	};
+
 
 	$scope.search = function() {		
 		

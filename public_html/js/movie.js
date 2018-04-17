@@ -15,6 +15,8 @@ app.directive('ngFile', ['$parse', function ($parse) {
 }]);
 
 app.controller("MovieController", function($scope, $http, $window) {
+
+
    	$scope.message = "";
     
      $scope.getAllMovies = function () {
@@ -38,7 +40,19 @@ app.controller("MovieController", function($scope, $http, $window) {
      $scope.getAllMovies();
     }
 
-    
+     $http.get("../apis/session.php").then(function(response) {
+  $scope.login = response.data.isLogin;   
+  $scope.admin = response.data.isAdmin;  
+   
+  });
+  
+  $scope.logout = function(){
+  $http.get("../apis/logout.php").then(function(response) {
+  $window.location.href = '../views/cover.html';
+  });
+  };
+
+
     $scope.deleteMovie = function () {
 
         $scope.movies = $scope.movies.filter(function( obj ) {

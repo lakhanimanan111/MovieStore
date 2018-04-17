@@ -6,27 +6,45 @@
 	 <meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css"> 
-	<link rel="stylesheet" href="../css/editmovie.css"> 
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css">  -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
+	<link rel="stylesheet" href="../css/editmovie.css"> 
+	  <link href="../css/cover.css" rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet">
+	<style type="text/css">
+    	.inner h3, h1 {
+				color:white;
+				font-size:30px;
+				text-align-last: center;
+			}
+    </style>
 </head>
 <body>
 <div ng-app="myApp" ng-controller="ModifyMovieController" class="container"> 
+<div class = "row adminheader">
+		<div class="col-lg-2 inner">
 
-<div class="row panel panel-default">
-<div class="col-lg-12 panel-body">
+			    
+			<h3 class="masthead-brand">Filmsgalore </h3>
+			        
+				
+		</div>
+		<div class="col-lg-10">	
+		<nav class="nav nav-masthead">
+        	
+           <a class="nav-link" href="main.html">Search</a>
 
+           <a class="nav-link" href="cart.html" ng-if="login">Cart</a>
+           <a class="nav-link active" href="editmovie.html" ng-show="admin">Edit Store</a>
+           <a class="nav-link" href="signup.html" ng-show="!login">Sign Up</a>
+           <a class="nav-link" href="login.html" ng-show="!login">Login</a>
+           <a class="nav-link" href="#" ng-show="login" ng-click="logout()">Logout</a>
+         </nav>
+         </div>
+</div>
  <div id="modifymovie">
-     <!-- delete movie -->
-		<!-- <div id="modify-movie-group"> 
-			<p id="operationmessage"></p>
-
-			<div class="form-group">
-			  <label class="col-form-label" for="inputDefault">Movie ID</label>
-			  <input type="text" class="form-control" placeholder="Enter a numeric id" id="inputDefault" ng-model="movieid">
-			</div>
-			<button type="button" class="btn btn-primary" ng-click="getMovie()">Get Details</button>
-		</div> -->
+	
 		<div id="modify-movie-details-group" class="panel-body">
 		<form id="modifymovieform">
 		  	<fieldset>		   
@@ -90,8 +108,7 @@
 		</form>
 	</div>
   </div>
-</div>
-</div> 
+ 
 </div><!-- ng-app -->
 
 

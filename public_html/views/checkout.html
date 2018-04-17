@@ -11,7 +11,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>-
     <link href="../css/cover.css" rel="stylesheet">
     <link href="../css/common.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" ></script>
   
@@ -36,25 +36,19 @@
 	<div class="container" ng-controller="checkoutController">
 	
 	<div class = "row">
-<div class="col-lg-2">
-<div id="header"></div>
-</div>
-<div class="col-lg-10">	
-<nav class="nav nav-masthead">
-         
-         <form class="form-inline mt-2 mt-md-0 searchbar">
-           <input class="transparent form-control mr-sm-2 " type="text" placeholder="Search" aria-label="Search">
-           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-         </form>
-         
-           <a class="nav-link active" href="#" ng-if="login">Cart</a>
-           <a class="nav-link" href="#" ng-show="admin">Edit Store</a>
-           <a class="nav-link" href="#" ng-show="!login">Sign Up</a>
-           <a class="nav-link" href="#" ng-show="!login">Login</a>
+		<div class="col-lg-2">
+		<div id="header"></div>
+		</div>
+		<div class="col-lg-10">	
+		<nav class="nav nav-masthead">
+        	
+           <a class="nav-link" href="main.html">Search</a>
+
+           <a class="nav-link" href="cart.html" ng-if="login">Cart</a>
+           <a class="nav-link" href="editmovie.html" ng-show="admin">Edit Store</a>
+           <a class="nav-link" href="signup.html" ng-show="!login">Sign Up</a>
+           <a class="nav-link" href="login.html" ng-show="!login">Login</a>
            <a class="nav-link" href="#" ng-show="login" ng-click="logout()">Logout</a>
-          
-         
-        
          </nav>
          </div>
          </div>
@@ -63,7 +57,7 @@
 	
 		<form ng-submit="submit()" >	
 			<fieldset>
-			  <h2 class="textcolor">Review Cart and Shipping Details</h2>
+			  <h5 class="textcolor">Review Cart and Shipping Details</h2>
 			  <div class="transparent" id="checkoutDetails">
 				<div class="card">
 				  <div class="card-header">
