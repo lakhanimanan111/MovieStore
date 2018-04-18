@@ -14,7 +14,11 @@ app.controller('orderHistoryController',['$scope', '$http', '$window',function($
 	
 	$http.get("../apis/orderhistory.php").then(function(response) {	
 			console.log(response.data);
-			$scope.orderhistory = response.data;
+			if(response.data!=0){
+			$scope.orderhistory = response.data;}
+			else{
+				$window.location.href = '../views/.html';
+				}
 		});
 	
 }]);

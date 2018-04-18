@@ -28,7 +28,7 @@ if ($result->num_rows > 0) {
 	echo json_encode($resultArray, JSON_FORCE_OBJECT);
 }
 else{
-	//plcaeholder foe session not htere
+	echo 0;
 	}
 
 ?>

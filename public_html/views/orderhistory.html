@@ -61,12 +61,15 @@
 								
 								<div ng-repeat="x in orderhistory" class="border border-dark p-3 m-3" >
 									<div class = "clearfix" >
-										<h5>Order Id : {{x.orderid}}</h5>
-										<div ng-repeat = "moviedata in x.moviedetails" class = "clearfix  border border-dark p-1 m-1">
+										
+										<div class = "border border-dark p-1 m-1">
+										<h5 class = "border border-dark p-1 m-1">Order Id : {{x.orderid}}</h5>
+										<div ng-repeat = "moviedata in x.moviedetails" class = "clearfix">
 										<img ng-src="../images/{{moviedata.imageurl}}" class="gallery " >
 										<h6>Title : <small >{{moviedata.title}}</small></h6>	 
 										<h6>Quantity : <small >{{moviedata.quantity}}</small></h6>
 										<h6>Price : $<small >{{moviedata.cost}}</small></h6>
+										</div>
 										</div>
 										</div>
 										</div>
