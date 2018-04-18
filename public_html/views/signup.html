@@ -26,7 +26,7 @@
       <label class="col-form-label col-form-label-sm" for="inputSmall">Email address <span >*</span></label>
       <input type="text" class="form-control form-control-sm" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter email" ng-model="email" ng-required="true" ng-change="checkEmailValidity()" >
       <span ng-show="!email.length">Please enter something!</span>
-      <span class="error" ng-show="!userValidEmail">Not valid email!</span>
+      <span class="error" ng-show="email.length && !userValidEmail">Not valid email!</span>
       <span class="error" ng-show="usernameExists">The username already exists!</span>
     </div>
     
@@ -52,7 +52,7 @@
       <label class="col-form-label col-form-label-sm" for="inputSmall">Confirm Password <span >*</span></label>
       <input type="password" class="form-control form-control-sm" id="confirmpassword" name="confirmpassword" ng-change="verifyPassword()" placeholder="ConfirmPassword" ng-model="confirmpassword">
       <span ng-show="!confirmpassword.length">Please enter something!</span>
-      <span ng-show="!passwordMatch">Passwords don't match.</span>
+      <span ng-show="confirmpassword.length && !passwordMatch">Passwords don't match.</span>
     </div>
     
     <button type="submit" class="btn btn-primary">Submit</button>

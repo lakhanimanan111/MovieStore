@@ -60,10 +60,17 @@ app.controller('signUpController',['$scope', '$http', '$window',function($scope,
 		 $scope.usernameExists = true;
 		 }
 	 else{
-		$http.post("../apis/signup.php", data)
-		.then(function() {	
-		$window.location.href = '../views/login.html';		
-		});	
+		 
+		 if(!$scope.usernameExists  && $scope.passwordMatch && $scope.goodStrength && $scope.userValidEmail){
+				$http.post("../apis/signup.php", data)
+				.then(function() {	
+			$window.location.href = '../views/login.html';		
+				});
+			 }else{
+				 $window.location.href = '../views/signup.html';
+				 }
+			
+		 
 		 }	 
 	
     });
