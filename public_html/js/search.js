@@ -15,9 +15,7 @@ app.controller('mainController', ['$scope', '$http', '$window', function($scope,
 	 
 	});
 
-	$http.get("../apis/getCountTempCart.php").then(function(response) {
-			$scope.count = (response.data.length == 2) ? 0 : parseInt(response.data);
-		});
+	
 
 	$scope.logout = function(){
 		$http.get("../apis/logout.php").then(function(response) {
@@ -52,8 +50,6 @@ app.controller('mainController', ['$scope', '$http', '$window', function($scope,
 			};
 
 			$http.post("../apis/addToCart.php", data).then(function(response) {
-					$scope.count == "" ? 0 : parseInt($scope.count);
-					$scope.count = parseInt($scope.count) + 1;
 					movie.disabled = true;
 			});
 
@@ -63,8 +59,6 @@ app.controller('mainController', ['$scope', '$http', '$window', function($scope,
 
 	$scope.buy = function(movie) {
 		if(!$scope.login) {
-
-            alert("User has not logged in");
             $window.location.href = '../views/login.html';
 
         } else {

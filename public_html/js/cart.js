@@ -19,11 +19,7 @@ app.controller('cartController',['$scope', '$http', '$window',function($scope, $
 
             $http.get("../apis/getCartDetails.php").then(function(response) {       
                 $temp = response.data;
-                console.log("temp: " + $temp);
-                console.log($temp.length);
                 $temp = $temp.length == 2 ? "" : $temp;
-                console.log("temp: " + $temp);
-                console.log($temp.length);
                 $scope.cart = [];
                 angular.forEach($temp, function(item) {
                     $scope.cart.push(item);
@@ -91,7 +87,7 @@ app.controller('cartController',['$scope', '$http', '$window',function($scope, $
     
 
    $scope.getTotal = function() { 
-    	console.log("subTotal" + $scope.subTotal);
+    	
     	var total = 0;
         var subTotal = $scope.getSubTotal();
     	total =  parseFloat(subTotal) + parseFloat(0.825*subTotal);
@@ -102,10 +98,8 @@ app.controller('cartController',['$scope', '$http', '$window',function($scope, $
     }
 
     $scope.checkout = function() {
-        $http.get("../apis/copyTempCart.php").then(function(response) {
-            $window.location.href = '../views/checkout.html';
-        });
-        
-    }
+     
+	$window.location.href = '../views/checkout.html';  
+  }
 
 }]);

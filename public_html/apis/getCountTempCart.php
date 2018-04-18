@@ -1,6 +1,6 @@
 <?php
 	
-	include 'ChromePhp.php';
+	//include 'ChromePhp.php';
 	session_start();
 	
 	require_once('../includes/dbconnect.php');
@@ -18,7 +18,7 @@
 
 	//$result = json_encode($rows);
 
-	ChromePhp::log($result);
+	//ChromePhp::log($result);
 
 	echo $result;
 

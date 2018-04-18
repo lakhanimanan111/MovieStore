@@ -1,17 +1,9 @@
 <?php
 
-	//include 'ChromePhp.php';
-
 	$updateStatus = 0;
 
 	session_start();
 	$userid = $_SESSION["userid"];
-
-	//Check of if user has logged in
-	/*if(!isset($userid)) {
-		echo $updateStatus;
-		return;
-	}*/
 
 	$request_body = file_get_contents('php://input');
 	$requestParams = json_decode( $request_body, true );
@@ -20,8 +12,7 @@
 
 	require_once('../includes/dbconnect.php');
 
-	//update cart with the selected movie
-	$sqlDeleteFromCart = "delete from tempcart where movieid = '$movieId'";
+	$sqlDeleteFromCart = "delete from cart where movieid = '$movieId' and userid = '$userid'";
 	$resultDeleteFromCart = $connection->query($sqlDeleteFromCart);
 	if ($resultDeleteFromCart === TRUE) {
 		$updateStatus = 1;		

@@ -214,7 +214,8 @@
 								
 								<div ng-repeat="x in moviedata" >
 									<div class = "clearfix">
-										<img mg-src="../images/{{x.imageurl}}" class="gallery border" >
+										<img src="../images/{{x.imageurl}}" class="gallery border" ng-if="x.imageurl">
+										<img class="gallery border search-item__image" src="../images/NoImage.jpeg" ng-if="!x.imageurl">
 										<div>
 										<h6>Title : <small >{{x.title}}</small></h6>
 										<h6>Description :  <small >{{x.description}}</small></h6>
@@ -235,7 +236,7 @@
 								
 								
 									<p class="lead">
-										<!-- <button ng-click="go()" class="btn btn-primary">Update Cart</button> -->
+										
 										<button type="submit" class="btn btn-primary">Place Order</button>										
 									</p>
 								

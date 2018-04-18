@@ -1,6 +1,6 @@
 <?php
 	
-	include 'ChromePhp.php';
+	
 	session_start();
 	$request_body = file_get_contents('php://input');
 	$requestParams = json_decode( $request_body, true );
@@ -10,9 +10,9 @@
 
 	require_once('../includes/dbconnect.php');
 
-	$sql = "update tempcart set quantity = '$quantity' where movieid = '$movieid' and userid = '$userid'";
+	$sql = "update cart set quantity = '$quantity' where movieid = '$movieid' and userid = '$userid'";
 	 
-	ChromePhp::log($sql);
+	
 	$result = $connection->query($sql);
 
 	$rows = array();
@@ -20,6 +20,4 @@
 		$updateStatus = 1;		
 	}
 	echo $updateStatus;
-
-	//ChromePhp::log($result);
 ?>
