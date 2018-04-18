@@ -71,6 +71,15 @@ app.controller('cartController',['$scope', '$http', '$window',function($scope, $
         
     }
 
+    $scope.remove = function(movie) {
+         var data = {
+            movieid: movie.movieid
+        };
+
+        $http.post("../apis/removeFromCart.php", data).then(function(response) {
+           $window.location.reload();
+        });
+    }
 
     $scope.getSubTotal = function() { 
         var subTotal = 0;

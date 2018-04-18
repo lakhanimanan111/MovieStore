@@ -16,6 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
   <script src='../js/config.js'></script>
   <script src='../js/cart.js'></script>
@@ -62,7 +63,6 @@
 		<h1>There are no items in cart!</h1>
 	</div>
 
-	
 
 	<div class="cartcontainer transparent">
 	<div class="inner" ng-show="cart.length != 0">
@@ -75,19 +75,22 @@
 						<img src="../images/{{movie.imageurl}}" alt="Image not found">
 						<!-- <h3>Remove product</h3> -->
 					</a>
+
 				</header>
+
 
 				<div class="content">
 
-					<h1>{{movie.title}}</h1>
-<!-- 					{{movie.description}}
- -->			</div>
+					<h1>{{movie.title}}</h1>					
+					<!-- {{movie.description}} -->
+
+			</div>
 
 				<footer class="content">
 					<button ng-disabled="movie.subDisabled" ng-click="subQuantity(movie)"><span class="qt-minus">-</span></button>
 					<span class="qt">{{movie.quantity}}</span>
 					<button ng-disabled="movie.addDisabled" ng-click="addQuantity(movie)"><span class="qt-plus">+</span></button>
-
+					<button style="font-size: 15px" ng-click="remove(movie)">Remove</button>
 					<h2 class="full-price">
 						${{movie.price * movie.quantity}}
 					</h2>
