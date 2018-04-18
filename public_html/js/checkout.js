@@ -15,23 +15,25 @@ app.controller('checkoutController',['$scope', '$http', '$window',function($scop
 	
 	$scope.totalCost = 0;
 	$http.get("../apis/cartinfo.php").then(function(response) {	
+	 $scope.disableCheckout = false;
 	 if(response.data != 0){
+		 
+		 	
 		for(x in response.data){
 		$scope.totalCost = $scope.totalCost + response.data[x].cost;
 		}
+		
 		$scope.moviedata = response.data;
+		if(angular.equals({}, response.data))
+			$scope.disableCheckout = true;
+		
 	}else{
 		$window.location.href = '../views/login.html';
 		}
 
 	
     });
-    
-    
-    /*$scope.go = function () {
-		$window.location.href = '../views/cart.html';
-	}*/
-	
+    	
    $scope.failure = false; 
    $scope.submit = function() { 
    $http.post("../apis/checkout.php")

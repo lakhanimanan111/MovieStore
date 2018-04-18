@@ -5,12 +5,13 @@ $orderStatus = 0;
 if(isset($_SESSION['userid'])){
 $userid = $_SESSION["userid"];
 require_once('../includes/dbconnect.php');
-$cartsql = "select GROUP_CONCAT(p.quantitypurchased SEPARATOR ', ') as quantities, p.orderid, GROUP_CONCAT(m.title SEPARATOR ', ') as titles, GROUP_CONCAT(imageurl SEPARATOR ',') as images, GROUP_CONCAT(m.price SEPARATOR ', ') as price from purchasehistory as p join (select title, price, movieid, (SELECT imageurl FROM movieimages as i WHERE i.movieid = movieid limit 1) as imageurl from moviedata)as m on p.movieid  = m.movieid where userid='$userid' group by orderid";
+$cartsql = "select GROUP_CONCAT(p.quantitypurchased SEPARATOR ', ') as quantities,GROUP_CONCAT(p.timestamp SEPARATOR ', ') as timestamp, p.orderid, GROUP_CONCAT(m.title SEPARATOR ', ') as titles, GROUP_CONCAT(imageurl SEPARATOR ',') as images, GROUP_CONCAT(m.price SEPARATOR ', ') as price from purchasehistory as p join (select title, price, movieid, (SELECT imageurl FROM movieimages as i WHERE i.movieid = d.movieid limit 1) as imageurl from moviedata as d)as m on p.movieid  = m.movieid where userid='$userid' group by orderid";
 $result = $connection->query($cartsql);
 $resultArray = array();
 if ($result->num_rows > 0) {
 	while($row = $result->fetch_assoc()) {
 	$movieList = explode(',', $row["titles"]);
+	$timestamp = explode(',', $row["timestamp"]);
 	$quantityList = explode(',', $row["quantities"]);
 	$imageList = explode(',', $row["images"]);
 	$priceList = explode(',', $row["price"]);
@@ -21,7 +22,8 @@ if ($result->num_rows > 0) {
     $movieInfo = array('title' => $movieList[$i], 'quantity' =>  $quantityList[$i], 'imageurl' => $imageList[$i], 'cost' => $priceList[$i]);	
 	$movieDetails[] = $movieInfo;	
 	}
-	$orderDetails = array("orderid"=>$row["orderid"], "moviedetails"=>$movieDetails);
+	$date = explode(' ', $timestamp[0]);
+	$orderDetails = array("orderid"=>$row["orderid"], "timestamp"=>$date[0],"moviedetails"=>$movieDetails);
 	$resultArray[] = $orderDetails;
 	}
 	}
