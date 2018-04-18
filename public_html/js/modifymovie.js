@@ -23,6 +23,21 @@ app.directive('ngFile', ['$parse', function ($parse) {
  };
 }]);
 
+
+app.directive('stringToNumber', function() {
+  return {
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModel) {
+      ngModel.$parsers.push(function(value) {
+        return '' + value;
+      });
+      ngModel.$formatters.push(function(value) {
+        return parseFloat(value, 10);
+      });
+    }
+  };
+});
+
 app.controller ( "ModifyMovieController", ['$scope', '$http', '$window', '$location',
     function($scope, $http, $window, $location) {
 

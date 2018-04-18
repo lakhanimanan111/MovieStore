@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-<div ng-app="myApp" ng-controller="ModifyMovieController" class="container"> 
+<div ng-app="myApp" ng-controller="ModifyMovieController" class="container textcolor"> 
 <div class = "row adminheader">
 		<div class="col-lg-2 inner">
 
@@ -46,36 +46,42 @@
  <div id="modifymovie">
 	
 		<div id="modify-movie-details-group" class="panel-body">
-		<form id="modifymovieform">
+		<form id="modifymovieform" ng-submit="uploadAndEditMovieDetails()">
 		  	<fieldset>		   
 			   	<div class="form-group">
-				  <label class="col-form-label" for="movietitle">Title</label>
-				  <input type="text" class="form-control" id="movietitle" ng-model="modifiedmoviedetails.title">
+				  <label class="col-form-label" for="movietitle">Title<span >*</span></label>
+				  <input type="text" class="form-control" id="movietitle" ng-model="modifiedmoviedetails.title" ng-required="true">
+				  <span ng-show="!modifiedmoviedetails.title.length">Please enter something!</span>
 				</div>
 
 			    <div class="form-group">
-			      <label class="col-form-label" for="moviedesc">Description</label>
-			      <textarea class="form-control" id="movieDescription" ng-model="modifiedmoviedetails.description" rows="3"></textarea>
+			      <label class="col-form-label" for="moviedesc">Description<span >*</span></label>
+			      <textarea class="form-control" id="movieDescription" ng-model="modifiedmoviedetails.description" rows="3" ng-required="true"></textarea>
+			       <span ng-show="!modifiedmoviedetails.description.length">Please enter something!</span>
 			    </div>
 
 			    <div class="form-group">
-				  <label class="col-form-label" for="moviegenre">Genre</label>
-				  <input type="text" class="form-control" id="movieGenre" ng-model="modifiedmoviedetails.genre">
+				  <label class="col-form-label" for="moviegenre">Genre<span >*</span></label>
+				  <input type="text" class="form-control" id="movieGenre" ng-model="modifiedmoviedetails.genre" ng-required="true">
+				   <span ng-show="!modifiedmoviedetails.genre.length">Please enter something!</span>
 				</div>
 
 		 		<div class="form-group">
-				  <label class="col-form-label" for="movieyear">Year</label>
-				  <input type="text" class="form-control" id="movieYear" ng-model="modifiedmoviedetails.year">
+				  <label class="col-form-label" for="movieyear">Year<span >*</span></label>
+				  <input type="number" string-to-number class="form-control" id="movieYear" ng-model="modifiedmoviedetails.year" ng-required="true" min="1800" max="3000">
+				  <span ng-show="!modifiedmoviedetails.year">This accepts years after 1800</span>
 				</div>
 
 				<div class="form-group">
 				  <label class="col-form-label" for="movieruntime">Runtime (minutes)</label>
-				  <input type="text" class="form-control" id="movieRuntime" ng-model="modifiedmoviedetails.runtime_minutes">
+				  <span >*</span><input type="number" string-to-number class="form-control" id="movieRuntime" ng-model="modifiedmoviedetails.runtime_minutes" ng-required="true" min="0">
+				   <span ng-show="!modifiedmoviedetails.runtime_minutes">This accepts only numbers </span>
 				</div>	
 
 				<div class="form-group">
-				  <label class="col-form-label" for="movierating">Rating</label>
-				  <input type="text" class="form-control" id="movieRating" ng-model="modifiedmoviedetails.rating">
+				  <label class="col-form-label" for="movierating">Rating<span >*</span></label>
+				  <input type="number" string-to-number class="form-control" id="movieRating" ng-model="modifiedmoviedetails.rating" ng-required="true" step="any" min="0" max="10">
+				   <span ng-show="!modifiedmoviedetails.rating">This accepts only numbers between 0.0 to 10.0</span>
 				</div>		
 			   
 			   	<!-- file upload -->
@@ -93,7 +99,7 @@
 					  <li class="list-group-item d-flex justify-content-between align-items-center" 
 					  	ng-repeat="img in modifiedmoviedetails.imageurl track by $index">
 					    <img src="../images/{{img}}" alt="no image found" class="thumbnailimg">
-					    <p>{{img}}</p>
+					    <p class="imgnamep">{{img}}</p>
 					    <button type="button" class="btn btn-primary btn-sm" ng-click="deleteMovieImage(img,modifiedmoviedetails.movieid)">
           				 Remove 
         				</button>
@@ -103,7 +109,7 @@
 
  				</div>
 
-		    	<button type="submit" class="btn btn-primary" ng-click="uploadAndEditMovieDetails()">Submit</button>
+		    	<button type="submit" class="btn btn-primary">Submit</button>
 		  	</fieldset>
 		</form>
 	</div>

@@ -16,7 +16,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
   <script src='../js/config.js'></script>
   <script src='../js/cart.js'></script>
@@ -63,6 +62,7 @@
 		<h1>There are no items in cart!</h1>
 	</div>
 
+	
 
 	<div class="cartcontainer transparent">
 	<div class="inner" ng-show="cart.length != 0">
@@ -70,27 +70,30 @@
 	</div>
 		<section id="cart"> 
 			<article class="product" ng-repeat="movie in cart">
-				<header>
-					<a>
-						<img src="../images/{{movie.imageurl}}" alt="Image not found">
-						<!-- <h3>Remove product</h3> -->
-					</a>
-
+				<header class="text-center">
+					
+					<img  src="../images/{{movie.imageurl}}" ng-if="movie.imageurl">
+				    <img  src="../images/NoImage.jpeg" ng-if="!movie.imageurl">
 				</header>
 
-
-				<div class="content">
-
-					<h1>{{movie.title}}</h1>					
-					<!-- {{movie.description}} -->
-
-			</div>
+				<div class="content row">
+					<h5 class="col-lg-10">{{movie.title}}</h5>
+					<div class ="col-lg-1 removebtn">
+					<button class="btn-primary" ng-click="remove(movie)">Remove</button>	
+					</div>
+					
+ 				</div>
 
 				<footer class="content">
-					<button ng-disabled="movie.subDisabled" ng-click="subQuantity(movie)"><span class="qt-minus">-</span></button>
-					<span class="qt">{{movie.quantity}}</span>
-					<button ng-disabled="movie.addDisabled" ng-click="addQuantity(movie)"><span class="qt-plus">+</span></button>
-					<button style="font-size: 15px" ng-click="remove(movie)">Remove</button>
+					<button ng-disabled="movie.subDisabled" ng-click="subQuantity(movie)" class="minusbutton plusbutton btn-warning">
+						<span>-</span>
+					</button>
+					<span>{{movie.quantity}}</span>
+					<button ng-disabled="movie.addDisabled" ng-click="addQuantity(movie)" class="btn-warning plusbutton">
+						<span>+</span>
+					</button>
+
+					
 					<h2 class="full-price">
 						${{movie.price * movie.quantity}}
 					</h2>
@@ -102,18 +105,19 @@
 			</article>
 		</section>
 		<footer id="site-footer">
-			<div class="container clearfix">
+			<div class="container clearfix row">
 
-				<div class="left">
-					<h2 class="subtotal" ng-model="subTotal">Subtotal: {{ getSubTotal() | currency }}</h2>
-					<h3 class="tax" ng-model="tax">Taxes (8.25%): ${{ (0.825 * getSubTotal()) | number : 2}}</h3>
-					<h3 class="shipping" ng-model="shippingCost">Shipping: $4.99</h3>
+				<div class="col-lg-6 text-center">
+					<h5 class="subtotal" ng-model="subTotal">Subtotal: {{ getSubTotal() | currency }}</h5>
+					<h5 class="tax" ng-model="tax">Taxes (8.25%): ${{ (0.825 * getSubTotal()) | number : 2}}</h5>
+					<h5 class="shipping" ng-model="shippingCost">Shipping: $4.99</h5>
 				</div>
 
-				<div class="right">
+				<div class="col-lg-6 text-center">
 					<h1 class="total">Total: <span>${{ getTotal() }}</span></h1>
-					<button ng-disabled="cart.length == 0" class="btn" style="width: 100%;" ng-click="checkout()">Checkout</button>
-					<a href="./main.html"><center>Continue Shopping </center></a>
+					<button ng-disabled="cart.length == 0" class="btn btn-primary" ng-click="checkout()">Checkout</button>
+
+					<a href="./main.html"> <center>Continue Shopping</center> </a>
 				</div>
 
 			</div>

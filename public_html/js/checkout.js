@@ -33,13 +33,27 @@ app.controller('checkoutController',['$scope', '$http', '$window',function($scop
 
 	
     });
-    	
+    
+    
+ //    $scope.go = function () {
+	// 	$window.location.href = '../views/cart.html';
+	// }
+
+	$scope.redirectModal = function () {
+			$window.location.href = '../views/main.html';
+	}
+	
    $scope.failure = false; 
    $scope.submit = function() { 
    $http.post("../apis/checkout.php")
     .then(function(response) {
 		console.log(response);
 		if(response.data == 1){
+
+			  // var message = "Order was placed successfully";
+		   //     $("#returnmsg").html(message);
+    	// 	   $("#messagemodal").modal('show');
+
 			$window.location.href = '../views/main.html';
 			}else if(response.data == 2){
 				$window.location.href = '../views/login.html';
