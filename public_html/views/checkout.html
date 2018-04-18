@@ -45,6 +45,7 @@
            <a class="nav-link" href="main.html">Search</a>
 
            <a class="nav-link" href="cart.html" ng-if="login">Cart</a>
+           <a class="nav-link" href="orderhistory.html" ng-if="login">Order History</a>
            <a class="nav-link" href="editmovie.html" ng-show="admin">Edit Store</a>
            <a class="nav-link" href="signup.html" ng-show="!login">Sign Up</a>
            <a class="nav-link" href="login.html" ng-show="!login">Login</a>
@@ -213,13 +214,13 @@
 								
 								<div ng-repeat="x in moviedata" >
 									<div class = "clearfix">
-										<img src="../images/{{x.imageurl}}" class="gallery border" >
+										<img mg-src="../images/{{x.imageurl}}" class="gallery border" >
 										<div>
-										<h6>Title : <small class="text-muted">{{x.title}}</small></h6>
-										<h6>Description :  <small class="text-muted">{{x.description}}</small></h6>
-										<h6>Genre :  <small class="text-muted">{{x.genre}}</small></h6>
-										<h6>Quantity : <small class="text-muted">{{x.quantity}}</small></h6>
-										<h6>Price : $<small class="text-muted">{{x.cost}}</small></h6>
+										<h6>Title : <small >{{x.title}}</small></h6>
+										<h6>Description :  <small >{{x.description}}</small></h6>
+										<h6>Genre :  <small >{{x.genre}}</small></h6>
+										<h6>Quantity : <small >{{x.quantity}}</small></h6>
+										<h6>Price : $<small >{{x.cost}}</small></h6>
 										</div>
 									</div>
 								</div>

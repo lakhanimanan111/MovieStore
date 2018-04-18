@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MovieStore</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>-
+    <link href="../css/cover.css" rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" ></script>
+  <style>
+  .gallery {
+	  float: left;
+	  height: 180px;
+	  width: 180px;
+	  padding: 5px;
+	  margin-right: 20px;
+	}
+	.cartdetails {
+		margin-left:20px;
+	}
+	
+	
+	
+  </style>
+  
+</head>
+<body ng-app="myApp">
+	
+	<div class="container" ng-controller="orderHistoryController">
+	
+	<div class = "row">
+		<div class="col-lg-2">
+		<div id="header"></div>
+		</div>
+		<div class="col-lg-10">	
+		<nav class="nav nav-masthead">
+        	
+           <a class="nav-link" href="main.html">Search</a>
+           <a class="nav-link" href="cart.html" ng-if="login">Cart</a>
+           <a class="nav-link" href="orderhistory.html" ng-if="login">Order History</a>
+           <a class="nav-link" href="editmovie.html" ng-show="admin">Edit Store</a>
+           <a class="nav-link" href="signup.html" ng-show="!login">Sign Up</a>
+           <a class="nav-link" href="login.html" ng-show="!login">Login</a>
+           <a class="nav-link" href="#" ng-show="login" ng-click="logout()">Logout</a>
+         </nav>
+         </div>
+         </div>
+         
+     <div class="container transparent">
+     <div class="card-body">
+	 <div class="jumbotron">
+					
+     
+     <legend>Order Information</legend>
+								
+								<div ng-repeat="x in orderhistory" class="border border-dark p-3 m-3" >
+									<div class = "clearfix" >
+										<h5>Order Id : {{x.orderid}}</h5>
+										<div ng-repeat = "moviedata in x.moviedetails" class = "clearfix  border border-dark p-1 m-1">
+										<img ng-src="../images/{{moviedata.imageurl}}" class="gallery " >
+										<h6>Title : <small >{{moviedata.title}}</small></h6>	 
+										<h6>Quantity : <small >{{moviedata.quantity}}</small></h6>
+										<h6>Price : $<small >{{moviedata.cost}}</small></h6>
+										</div>
+										</div>
+										</div>
+								
+								</div>
+     
+     </div>
+     </div>
+     </div>    
+
+	
+</body>
+<script src='../js/header.js'></script>
+<script src='../js/orderhistory.js'></script>
+</html>
