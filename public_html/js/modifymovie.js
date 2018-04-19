@@ -42,10 +42,14 @@ app.controller ( "ModifyMovieController", ['$scope', '$http', '$window', '$locat
     function($scope, $http, $window, $location) {
 
        $http.get("../apis/session.php").then(function(response) {
-  $scope.login = response.data.isLogin;   
-  $scope.admin = response.data.isAdmin;  
-   
-  });
+			  $scope.login = response.data.isLogin;   
+			  $scope.admin = response.data.isAdmin;  
+			   if(!$scope.admin && !$scope.login)
+				{
+					$window.location.href = '../views/signup.html';
+
+				}
+		});
   
   $scope.logout = function(){
   $http.get("../apis/logout.php").then(function(response) {

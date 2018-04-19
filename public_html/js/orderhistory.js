@@ -17,7 +17,7 @@ app.controller('orderHistoryController',['$scope', '$http', '$window',function($
 			if(response.data!=0){
 			$scope.orderhistory = response.data;}
 			else{
-				$window.location.href = '../views/.html';
+				$window.location.href = '../views/login.html';
 				}
 		});
 	

@@ -15,7 +15,16 @@ app.directive('ngFile', ['$parse', function ($parse) {
 }]);
 
 app.controller("MovieController", function($scope, $http, $window) {
+	$http.get("../apis/session.php").then(function(response) {
+		$scope.login = response.data.isLogin;		
+		$scope.admin = response.data.isAdmin;
+		if(!$scope.admin && !$scope.login)
+		{
+				$window.location.href = '../views/signup.html';
 
+		}
+	 
+	});
 
    	$scope.message = "";
     
@@ -39,12 +48,6 @@ app.controller("MovieController", function($scope, $http, $window) {
     {
      $scope.getAllMovies();
     }
-
-     $http.get("../apis/session.php").then(function(response) {
-  $scope.login = response.data.isLogin;   
-  $scope.admin = response.data.isAdmin;  
-   
-  });
   
   $scope.logout = function(){
   $http.get("../apis/logout.php").then(function(response) {

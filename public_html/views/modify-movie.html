@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+z<!DOCTYPE html>
 <!-- <base href="/"> -->
 <html>
 <head>
@@ -33,12 +33,11 @@
 		<div class="col-lg-10">	
 		<nav class="nav nav-masthead">
         	
-           <a class="nav-link" href="main.html">Search</a>
-
-           <a class="nav-link" href="cart.html" ng-if="login">Cart</a>
-           <a class="nav-link active" href="editmovie.html" ng-show="admin">Edit Store</a>
-           <a class="nav-link" href="signup.html" ng-show="!login">Sign Up</a>
-           <a class="nav-link" href="login.html" ng-show="!login">Login</a>
+           <a class="nav-link" href="./main.html">Search</a>
+           <a class="nav-link" href="./cart.html" ng-if="login">Cart</a>
+           <a class="nav-link" href="./editmovie.html" ng-show="admin">Edit Store</a>
+           <a class="nav-link" href="./signup.html" ng-show="!login">Sign Up</a>
+           <a class="nav-link" href="./login.html" ng-show="!login">Login</a>
            <a class="nav-link" href="#" ng-show="login" ng-click="logout()">Logout</a>
          </nav>
          </div>
@@ -68,20 +67,20 @@
 
 		 		<div class="form-group">
 				  <label class="col-form-label" for="movieyear">Year<span >*</span></label>
-				  <input type="number" string-to-number class="form-control" id="movieYear" ng-model="modifiedmoviedetails.year" ng-required="true" min="1800" max="3000">
-				  <span ng-show="!modifiedmoviedetails.year">This accepts years after 1800</span>
+				  <input type="text" class="form-control" id="movieYear" ng-model="modifiedmoviedetails.year" ng-required="true">
+				  <span ng-show="!modifiedmoviedetails.year.length">This accepts years after 1800</span>
 				</div>
 
 				<div class="form-group">
 				  <label class="col-form-label" for="movieruntime">Runtime (minutes)</label>
-				  <span >*</span><input type="number" string-to-number class="form-control" id="movieRuntime" ng-model="modifiedmoviedetails.runtime_minutes" ng-required="true" min="0">
-				   <span ng-show="!modifiedmoviedetails.runtime_minutes">This accepts only numbers </span>
+				  <span >*</span><input type="text" class="form-control" id="movieRuntime" ng-model="modifiedmoviedetails.runtime_minutes" ng-required="true">
+				   <span ng-show="!modifiedmoviedetails.runtime_minutes.length">This accepts only numbers </span>
 				</div>	
 
 				<div class="form-group">
 				  <label class="col-form-label" for="movierating">Rating<span >*</span></label>
-				  <input type="number" string-to-number class="form-control" id="movieRating" ng-model="modifiedmoviedetails.rating" ng-required="true" step="any" min="0" max="10">
-				   <span ng-show="!modifiedmoviedetails.rating">This accepts only numbers between 0.0 to 10.0</span>
+				  <input type="text" class="form-control" id="movieRating" ng-model="modifiedmoviedetails.rating" ng-required="true">
+				   <span ng-show="!modifiedmoviedetails.rating.length">This accepts only numbers between 0.0 to 10.0</span>
 				</div>		
 			   
 			   	<!-- file upload -->
